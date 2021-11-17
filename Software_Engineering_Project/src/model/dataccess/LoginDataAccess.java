@@ -1,9 +1,9 @@
 package model.dataccess;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import model.entities.User;
+
+import org.hibernate.Session;
+import org.hibernate.query.Query;
+
+import model.entities.Customer;
 
 public class LoginDataAccess {
 
@@ -12,23 +12,17 @@ public class LoginDataAccess {
 	private static final String USER = "postgres";
 
 	private static final String PWD = "123";
-	
+
 	private static final ConnectionFactory connectionFactory = new ConnectionFactory(URL, USER, PWD);
-	
-	public Boolean verifyCredentials(User user) throws ClassNotFoundException, SQLException {
 
-		Connection conection = connectionFactory.getConnection();
+	public Boolean verifyCustomerExists(Customer customer) {
 
-		final PreparedStatement stmt = conection.prepareStatement("SELECT * FROM users WHERE username=? and password=?");
+		Session session = connectionFactory.getConnection();
 
-		stmt.setString(1, user.getUserName());
-		stmt.setString(2, user.getPassword());
+		Query<Customer> query = session.createQuery("select 1 from CUSTOMERS c where c.id = :id", Customer.class);
+		query.setParameter("id", customer.getID());
 
-		ResultSet rs = stmt.executeQuery();
-
-		return rs.next();
-		
+		return query.uniqueResult() != null;
 	}
 
 }
-

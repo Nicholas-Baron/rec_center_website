@@ -37,4 +37,8 @@ public class Customer {
 	@Column(name = "customer_type")
 	@Enumerated(EnumType.STRING)
 	private CustomerType customerType;
+
+	public Integer getID() {
+		return this.customerID;
+	}
 }
