@@ -90,7 +90,7 @@ public class LoginView extends JFrame implements ActionListener {
 				String userName = txtUserName.getText();
 				String password = txtPassword.getText();
 				
-				LoginBusiness.getInstance().loginUser(userName, password);
+				LoginBusiness.getInstance().loginUser(userName);
 
 				new LoginSuccessView(txtUserName.getText());
 				dispose();

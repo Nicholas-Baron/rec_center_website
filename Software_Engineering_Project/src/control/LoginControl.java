@@ -29,7 +29,7 @@ public class LoginControl extends HttpServlet {
 			String userName = request.getParameter("username");
 			String password = request.getParameter("password");
 			
-			LoginBusiness.getInstance().loginUser(userName, password);
+			LoginBusiness.getInstance().loginUser(userName);
 				
 			request.setAttribute("Username", request.getParameter("username"));
 			address = "/view/LoginSuccessView.jsp";

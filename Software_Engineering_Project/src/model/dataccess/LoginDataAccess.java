@@ -15,7 +15,12 @@ public class LoginDataAccess {
 
 	private static final ConnectionFactory connectionFactory = new ConnectionFactory(URL, USER, PWD);
 
-	public Boolean verifyCustomerExists(Customer customer) {
+	/**
+	 * Check if the customer exists by id. 
+	 * @param customer 
+	 * @return
+	 */
+	public boolean verifyCustomerExists(Customer customer) {
 
 		Session session = connectionFactory.getConnection();
 
@@ -25,4 +30,18 @@ public class LoginDataAccess {
 		return query.uniqueResult() != null;
 	}
 
+	/**
+	 * Check if the customer exists by name. 
+	 * @param name
+	 * @return
+	 */
+	public boolean verifyCustomerExists(String name) {
+
+		Session session = connectionFactory.getConnection();
+
+		Query<Customer> query = session.createQuery("select 1 from CUSTOMERS c where c.name = :name", Customer.class);
+		query.setParameter("name", name);
+
+		return query.uniqueResult() != null;
+	}
 }
