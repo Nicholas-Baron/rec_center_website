@@ -24,7 +24,7 @@ public class LoginDataAccess {
 
 		Session session = connectionFactory.getConnection();
 
-		Query<Customer> query = session.createQuery("select 1 from CUSTOMERS c where c.id = :id", Customer.class);
+		Query<Customer> query = session.createQuery("select 1 from Customer c where c.id = :id", Customer.class);
 		query.setParameter("id", customer.getID());
 
 		return query.uniqueResult() != null;
@@ -39,7 +39,7 @@ public class LoginDataAccess {
 
 		Session session = connectionFactory.getConnection();
 
-		Query<Customer> query = session.createQuery("select 1 from CUSTOMERS c where c.name = :name", Customer.class);
+		Query<Customer> query = session.createQuery("select c from Customer c where c.name = :name", Customer.class);
 		query.setParameter("name", name);
 
 		return query.uniqueResult() != null;

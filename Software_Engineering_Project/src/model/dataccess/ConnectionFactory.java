@@ -10,6 +10,8 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.service.ServiceRegistry;
 
+import model.entities.Customer;
+
 public final class ConnectionFactory {
 	private final String url;
 	private final String user;
@@ -26,20 +28,29 @@ public final class ConnectionFactory {
 
 	public Session getConnection() {
 		if (sessionFactory == null) {
+			try {
+				Class.forName("org.postgresql.Driver");
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+
 			Map<String, String> settings = new HashMap<>();
 			settings.put("connection.driver_class", "org.postgresql.Driver");
-			settings.put("dialect", "org.hibernate.dialect.PostgreSQL10Dialect");
+			settings.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL10Dialect");
 			settings.put("hibernate.connection.url", url);
 			settings.put("hibernate.connection.username", user);
 			settings.put("hibernate.connection.password", pwd);
+			settings.put("hibernate.hbm2ddl.auto", "create");
+			settings.put("hibernate.show_sql", "true");
 
 			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(settings).build();
 
 			MetadataSources metadataSources = new MetadataSources(serviceRegistry);
+			metadataSources.addAnnotatedClass(Customer.class);
 			Metadata metadata = metadataSources.buildMetadata();
 			sessionFactory = metadata.getSessionFactoryBuilder().build();
 		}
-		return sessionFactory.getCurrentSession();
+		return sessionFactory.openSession();
 	}
 
 }
