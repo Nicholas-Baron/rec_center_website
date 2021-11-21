@@ -12,6 +12,7 @@ import org.hibernate.service.ServiceRegistry;
 import model.entities.Customer;
 import model.entities.HistoricalPrice;
 import model.entities.Professor;
+import model.entities.RecreationalActivity;
 import model.entities.Student;
 
 public final class ConnectionFactory {
@@ -63,7 +64,8 @@ public final class ConnectionFactory {
 			Metadata metadata = new MetadataSources(serviceRegistry)
 							.addAnnotatedClass(Customer.class).addAnnotatedClass(Student.class)
 							.addAnnotatedClass(Professor.class)
-							.addAnnotatedClass(HistoricalPrice.class).buildMetadata();
+							.addAnnotatedClass(HistoricalPrice.class)
+							.addAnnotatedClass(RecreationalActivity.class).buildMetadata();
 			sessionFactory = metadata.getSessionFactoryBuilder().build();
 		}
 		return sessionFactory.openSession();
