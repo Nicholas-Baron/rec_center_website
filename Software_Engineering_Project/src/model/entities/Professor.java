@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 
 @Entity(name="Professor")
 @DiscriminatorValue(value=CustomerType.Values.Professor)
-public class Professor extends Student {
+public class Professor extends Customer {
 	
 	@Column
 	private String department;
