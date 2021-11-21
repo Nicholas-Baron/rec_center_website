@@ -24,5 +24,4 @@ public final class LoginBusiness {
 			throw new MessageException("Incorrect credentials.");
 		}
 	}
-
 }
