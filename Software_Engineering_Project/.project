@@ -3,6 +3,7 @@
 	<name>Software_Engineering_Project</name>
 	<comment></comment>
 	<projects>
+		<project>rec_center_model</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

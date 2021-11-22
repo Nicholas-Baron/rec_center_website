@@ -52,7 +52,7 @@ public final class ConnectionFactory {
 			// on first access of a table, will update the schema
 			// see
 			// https://docs.jboss.org/hibernate/orm/5.6/userguide/html_single/Hibernate_User_Guide.html#configurations-hbmddl
-			settings.put("hibernate.hbm2ddl.auto", "update");
+			settings.put("hibernate.hbm2ddl.auto", "create");
 			// print out sql for debugging purposes
 			settings.put("hibernate.show_sql", "true");
 
