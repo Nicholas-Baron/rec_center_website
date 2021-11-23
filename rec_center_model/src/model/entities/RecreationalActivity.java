@@ -32,6 +32,7 @@ public class RecreationalActivity {
 	private List<HistoricalPrice> priceHistory;
 
 	@ManyToMany(cascade = { CascadeType.PERSIST })
-	@JoinTable(name = "activity_orders", joinColumns = @JoinColumn(name = "activity_id"), inverseJoinColumns = @JoinColumn(name = "order_id"))
+	@JoinTable(name = "activity_orders", joinColumns = @JoinColumn(name = "activity_id"),
+		inverseJoinColumns = @JoinColumn(name = "order_id"))
 	private List<Order> orders_used_in;
 }
