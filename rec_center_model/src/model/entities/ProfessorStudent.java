@@ -1,14 +1,14 @@
 package model.entities;
 
 import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-@Entity(name = "Student")
-@DiscriminatorValue(value = CustomerType.Values.Student)
-public class Student extends Customer {
-
+@Entity(name = "ProfessorStudent")
+@DiscriminatorValue(value = CustomerType.Values.ProfessorStudent)
+public class ProfessorStudent extends Customer {
 	@Column(name = "enter_date")
 	protected Date enterDate;
 
@@ -21,19 +21,12 @@ public class Student extends Customer {
 	@Column(name = "minor")
 	private String minor;
 
-	public String getMajor() {
-		return major;
-	}
+	@Column(name = "department")
+	private String department;
 
-	public void setMajor(String major) {
-		this.major = major;
-	}
+	@Column(name = "office")
+	private String office;
 
-	public String getMinor() {
-		return minor;
-	}
-
-	public void setMinor(String minor) {
-		this.minor = minor;
-	}
+	@Column(name = "research")
+	private String research;
 }

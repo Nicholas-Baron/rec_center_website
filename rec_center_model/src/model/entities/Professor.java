@@ -4,16 +4,16 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-@Entity(name="Professor")
-@DiscriminatorValue(value=CustomerType.Values.Professor)
+@Entity(name = "Professor")
+@DiscriminatorValue(value = CustomerType.Values.Professor)
 public class Professor extends Customer {
-	
-	@Column
+
+	@Column(name = "department")
 	private String department;
-	
-	@Column 
+
+	@Column(name = "office")
 	private String office;
-	
-	@Column
+
+	@Column(name = "research")
 	private String research;
 }
