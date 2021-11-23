@@ -1,4 +1,4 @@
-package model.entities;
+package model.dataccess;
 
 @SuppressWarnings("serial")
 public class MessageException extends RuntimeException {

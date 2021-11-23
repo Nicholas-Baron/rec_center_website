@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import model.dataccess.LoginBusiness;
-import model.entities.MessageException;
+import model.dataccess.MessageException;
 
 @SuppressWarnings("serial")
 public class LoginView extends JFrame implements ActionListener {
