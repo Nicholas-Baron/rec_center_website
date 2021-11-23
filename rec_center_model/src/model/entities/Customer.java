@@ -13,13 +13,14 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 import javax.persistence.Inheritance;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "CUSTOMERS")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="CUSTOMERTYPE", discriminatorType=DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "CUSTOMERTYPE", discriminatorType = DiscriminatorType.STRING)
 public class Customer {
 
 	@Id
