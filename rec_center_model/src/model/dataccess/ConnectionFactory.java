@@ -11,6 +11,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.service.ServiceRegistry;
 import model.entities.Customer;
 import model.entities.HistoricalPrice;
+import model.entities.Order;
 import model.entities.Professor;
 import model.entities.ProfessorStudent;
 import model.entities.RecreationalActivity;
@@ -67,7 +68,8 @@ public final class ConnectionFactory {
 							.addAnnotatedClass(Professor.class)
 							.addAnnotatedClass(HistoricalPrice.class)
 							.addAnnotatedClass(ProfessorStudent.class)
-							.addAnnotatedClass(RecreationalActivity.class).buildMetadata();
+							.addAnnotatedClass(RecreationalActivity.class)
+							.addAnnotatedClass(Order.class).buildMetadata();
 			sessionFactory = metadata.getSessionFactoryBuilder().build();
 		}
 		return sessionFactory.openSession();

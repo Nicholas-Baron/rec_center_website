@@ -1,6 +1,9 @@
 package model.entities;
 
 import java.sql.Date;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -42,6 +45,9 @@ public class Customer {
 	@Column(name = "customer_type")
 	@Enumerated(EnumType.STRING)
 	private CustomerType customerType;
+
+	@OneToMany(mappedBy = "customer", cascade = { CascadeType.PERSIST })
+	private List<Order> orders;
 
 	public Integer getID() {
 		return this.customerID;
