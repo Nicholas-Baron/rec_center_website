@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -35,8 +37,9 @@ public class Customer {
 	@Column
 	private String name;
 
-	@Column
-	protected String address;
+	@ManyToOne
+	@JoinColumn(name = "address_id")
+	protected Address address;
 
 	@Column
 	private int phone;

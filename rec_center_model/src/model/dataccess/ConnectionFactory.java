@@ -7,6 +7,7 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.service.ServiceRegistry;
 
+import model.entities.Address;
 import model.entities.Customer;
 import model.entities.HistoricalPrice;
 import model.entities.Order;
@@ -21,18 +22,17 @@ public final class ConnectionFactory {
 
 	public Session getConnection() {
 		if (sessionFactory == null) {
-			
 			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 							.configure("hibernate.cfg.xml").build();
 			// NOTE: Every annotated class needs to be added here
 			// for Hibernate to know about them
 			Metadata metadata = new MetadataSources(serviceRegistry)
-							.addAnnotatedClass(Customer.class).addAnnotatedClass(Student.class)
+							.addAnnotatedClass(Address.class).addAnnotatedClass(Customer.class)
+							.addAnnotatedClass(HistoricalPrice.class).addAnnotatedClass(Order.class)
 							.addAnnotatedClass(Professor.class)
-							.addAnnotatedClass(HistoricalPrice.class)
 							.addAnnotatedClass(ProfessorStudent.class)
 							.addAnnotatedClass(RecreationalActivity.class)
-							.addAnnotatedClass(Order.class).buildMetadata();
+							.addAnnotatedClass(Student.class).buildMetadata();
 			sessionFactory = metadata.getSessionFactoryBuilder().build();
 		}
 		return sessionFactory.openSession();
