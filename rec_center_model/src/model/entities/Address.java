@@ -1,5 +1,6 @@
 package model.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,14 +14,17 @@ public class Address {
 	@GeneratedValue
 	private int id;
 
+	@Column(nullable = false)
 	private String street;
 
 	private int number;
 
 	private int zipcode;
 
+	@Column(nullable = false)
 	private String city;
 
+	@Column(nullable = false)
 	private String state;
 
 }

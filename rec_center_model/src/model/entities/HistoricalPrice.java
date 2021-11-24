@@ -19,9 +19,10 @@ public class HistoricalPrice {
 	@GeneratedValue
 	private long id;
 
+	@Column(nullable = false)
 	private Date date;
 
-	@Column(scale = 2, precision = 10)
+	@Column(scale = 2, precision = 10, nullable = false)
 	private BigDecimal price;
 
 	@ManyToOne

@@ -28,12 +28,13 @@ public class Customer {
 	@GeneratedValue
 	protected int customerID;
 
-	@Column(name = "bronco_id")
+	@Column(name = "bronco_id", nullable=false)
 	private int broncoID;
 
 	@Column(name = "dob")
 	protected Date dateOfBirth;
 
+	@Column(nullable = false)
 	private String name;
 
 	@ManyToOne
