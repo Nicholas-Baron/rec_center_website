@@ -22,7 +22,6 @@ public class Order {
 	@GeneratedValue
 	private long id;
 
-	@Column
 	private Timestamp datetime;
 
 	@ManyToMany(cascade = { CascadeType.PERSIST })

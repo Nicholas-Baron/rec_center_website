@@ -22,7 +22,6 @@ public class RecreationalActivity {
 	@GeneratedValue
 	private long activityID;
 
-	@Column
 	private String name;
 
 	@Column(scale = 2, precision = 10)

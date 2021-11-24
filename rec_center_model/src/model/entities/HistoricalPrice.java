@@ -19,7 +19,6 @@ public class HistoricalPrice {
 	@GeneratedValue
 	private long id;
 
-	@Column
 	private Date date;
 
 	@Column(scale = 2, precision = 10)

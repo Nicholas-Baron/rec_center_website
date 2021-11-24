@@ -6,7 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-@Entity(name = "ProfessorStudent")
+@Entity
 @DiscriminatorValue(value = CustomerType.Values.ProfessorStudent)
 public class ProfessorStudent extends Customer {
 	@Column(name = "enter_date")
@@ -15,18 +15,13 @@ public class ProfessorStudent extends Customer {
 	@Column(name = "grad_date")
 	protected Date gradDate;
 
-	@Column(name = "major")
 	private String major;
 
-	@Column(name = "minor")
 	private String minor;
 
-	@Column(name = "department")
 	private String department;
 
-	@Column(name = "office")
 	private String office;
 
-	@Column(name = "research")
 	private String research;
 }

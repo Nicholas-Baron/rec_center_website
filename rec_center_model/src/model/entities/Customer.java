@@ -34,14 +34,12 @@ public class Customer {
 	@Column(name = "dob")
 	protected Date dateOfBirth;
 
-	@Column
 	private String name;
 
 	@ManyToOne
 	@JoinColumn(name = "address_id")
 	protected Address address;
 
-	@Column
 	private int phone;
 
 	@OneToMany(mappedBy = "customer", cascade = { CascadeType.PERSIST })
