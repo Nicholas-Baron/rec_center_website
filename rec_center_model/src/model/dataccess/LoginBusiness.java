@@ -13,13 +13,14 @@ public final class LoginBusiness {
 		return instance;
 	}
 
-	public void loginUser(String username) throws MessageException {
+	public boolean loginUser(String username) throws MessageException {
 		if (username.equals("")) {
 			throw new MessageException("Username not informed.");
 		}
-
-		if (!(new LoginDataAccess().verifyCustomerExists(username))) {
+		var result = new LoginDataAccess().verifyCustomerExists(username);
+		if (!result) {
 			throw new MessageException("Incorrect credentials.");
 		}
+		return result;
 	}
 }
