@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.dataccess.LoginBusiness;
-import model.entities.MessageException;
+import model.dataccess.MessageException;
 
 @SuppressWarnings("serial")
 public class LoginControl extends HttpServlet {

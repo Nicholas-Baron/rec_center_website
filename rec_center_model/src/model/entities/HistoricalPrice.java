@@ -9,15 +9,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "historical_prices")
 public class HistoricalPrice {
 
 	@Id
 	@GeneratedValue
 	private long id;
 
-	@Column
 	private Date date;
 
 	@Column(scale = 2, precision = 10)

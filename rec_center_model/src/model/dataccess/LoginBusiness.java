@@ -1,7 +1,5 @@
 package model.dataccess;
 
-import model.entities.MessageException;
-
 public final class LoginBusiness {
 
 	private LoginBusiness() {
