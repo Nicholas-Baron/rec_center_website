@@ -26,8 +26,7 @@ public class Order {
 	private Timestamp datetime;
 
 	@ManyToMany(cascade = { CascadeType.PERSIST })
-	@JoinTable(name = "activity_orders",
-		joinColumns = @JoinColumn(name = "order_id"),
+	@JoinTable(name = "activity_orders", joinColumns = @JoinColumn(name = "order_id"),
 		inverseJoinColumns = @JoinColumn(name = "activity_id"))
 	private List<RecreationalActivity> activities;
 
@@ -37,5 +36,8 @@ public class Order {
 
 	public int activityCount() {
 		return activities.size();
+	}
+
+	public Order() {
 	}
 }

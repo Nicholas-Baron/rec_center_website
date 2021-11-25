@@ -28,7 +28,7 @@ public class Customer {
 	@GeneratedValue
 	protected int customerID;
 
-	@Column(name = "bronco_id", nullable=false)
+	@Column(name = "bronco_id", nullable = false)
 	private int broncoID;
 
 	@Column(name = "dob")
@@ -49,4 +49,8 @@ public class Customer {
 	public Integer getID() {
 		return this.customerID;
 	}
+
+	public Customer() {
+	}
+
 }

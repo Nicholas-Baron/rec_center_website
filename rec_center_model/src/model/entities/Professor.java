@@ -16,4 +16,7 @@ public class Professor extends Customer {
 
 	@Column(nullable = false)
 	private String research;
+
+	public Professor() {
+	}
 }

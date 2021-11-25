@@ -36,4 +36,7 @@ public class Student extends Customer {
 	public void setMinor(String minor) {
 		this.minor = minor;
 	}
+
+	public Student() {
+	}
 }

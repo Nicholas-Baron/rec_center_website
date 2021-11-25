@@ -35,4 +35,7 @@ public class RecreationalActivity {
 	@JoinTable(name = "activity_orders", joinColumns = @JoinColumn(name = "activity_id"),
 		inverseJoinColumns = @JoinColumn(name = "order_id"))
 	private List<Order> orders_used_in;
+
+	public RecreationalActivity() {
+	}
 }

@@ -28,4 +28,7 @@ public class HistoricalPrice {
 	@ManyToOne
 	@JoinColumn(name = "activity_id", nullable = false)
 	private RecreationalActivity activity;
+
+	public HistoricalPrice() {
+	}
 }

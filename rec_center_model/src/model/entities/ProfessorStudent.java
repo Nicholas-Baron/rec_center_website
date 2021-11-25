@@ -29,4 +29,7 @@ public class ProfessorStudent extends Customer {
 
 	@Column(nullable = false)
 	private String research;
+
+	public ProfessorStudent() {
+	}
 }
