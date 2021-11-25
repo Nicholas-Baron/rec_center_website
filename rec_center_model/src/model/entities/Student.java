@@ -21,6 +21,25 @@ public class Student extends Customer {
 	@Column(nullable = false)
 	private String minor;
 
+	public Student() {
+	}
+
+	public Date getEnterDate() {
+		return enterDate;
+	}
+
+	public void setEnterDate(Date enterDate) {
+		this.enterDate = enterDate;
+	}
+
+	public Date getGradDate() {
+		return gradDate;
+	}
+
+	public void setGradDate(Date gradDate) {
+		this.gradDate = gradDate;
+	}
+
 	public String getMajor() {
 		return major;
 	}
@@ -35,8 +54,5 @@ public class Student extends Customer {
 
 	public void setMinor(String minor) {
 		this.minor = minor;
-	}
-
-	public Student() {
 	}
 }

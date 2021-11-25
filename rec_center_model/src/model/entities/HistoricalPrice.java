@@ -31,4 +31,22 @@ public class HistoricalPrice {
 
 	public HistoricalPrice() {
 	}
+
+	public HistoricalPrice(RecreationalActivity activity, Date date, BigDecimal price) {
+		this.activity = activity;
+		this.date = date;
+		this.price = price;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public RecreationalActivity getActivity() {
+		return activity;
+	}
 }

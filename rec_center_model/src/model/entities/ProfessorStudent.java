@@ -32,4 +32,32 @@ public class ProfessorStudent extends Customer {
 
 	public ProfessorStudent() {
 	}
+
+	public Date getEnterDate() {
+		return enterDate;
+	}
+
+	public Date getGradDate() {
+		return gradDate;
+	}
+
+	public String getMajor() {
+		return major;
+	}
+
+	public String getMinor() {
+		return minor;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public String getOffice() {
+		return office;
+	}
+
+	public String getResearch() {
+		return research;
+	}
 }

@@ -38,4 +38,25 @@ public class RecreationalActivity {
 
 	public RecreationalActivity() {
 	}
+
+	public RecreationalActivity(String name, BigDecimal price) {
+		this.name = name;
+		this.price = price;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public List<HistoricalPrice> getPriceHistory() {
+		return priceHistory;
+	}
+
+	public List<Order> getOrders_used_in() {
+		return orders_used_in;
+	}
 }

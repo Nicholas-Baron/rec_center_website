@@ -53,4 +53,28 @@ public class Customer {
 	public Customer() {
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getPhone() {
+		return phone;
+	}
+
+	public void setPhone(int phone) {
+		this.phone = phone;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
 }

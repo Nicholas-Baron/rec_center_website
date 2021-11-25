@@ -19,4 +19,16 @@ public class Professor extends Customer {
 
 	public Professor() {
 	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public String getOffice() {
+		return office;
+	}
+
+	public String getResearch() {
+		return research;
+	}
 }

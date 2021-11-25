@@ -1,5 +1,6 @@
 package model.entities;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -34,10 +35,37 @@ public class Order {
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
 
+	@Column(nullable = false, precision = 2, scale = 10, name = "total")
+	private BigDecimal totalAfterDiscount;
+
 	public int activityCount() {
 		return activities.size();
 	}
 
 	public Order() {
+	}
+
+	public Order(Customer customer, List<RecreationalActivity> activities, Timestamp datetime,
+					BigDecimal price) {
+		this.customer = customer;
+		this.activities = activities;
+		this.datetime = datetime;
+		this.totalAfterDiscount = price;
+	}
+
+	public Timestamp getDatetime() {
+		return datetime;
+	}
+
+	public List<RecreationalActivity> getActivities() {
+		return activities;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public BigDecimal getTotalAfterDiscount() {
+		return totalAfterDiscount;
 	}
 }
