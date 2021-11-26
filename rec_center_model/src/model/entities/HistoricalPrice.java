@@ -19,12 +19,34 @@ public class HistoricalPrice {
 	@GeneratedValue
 	private long id;
 
+	@Column(nullable = false)
 	private Date date;
 
-	@Column(scale = 2, precision = 10)
+	@Column(scale = 2, precision = 10, nullable = false)
 	private BigDecimal price;
 
 	@ManyToOne
 	@JoinColumn(name = "activity_id", nullable = false)
 	private RecreationalActivity activity;
+
+	public HistoricalPrice() {
+	}
+
+	public HistoricalPrice(RecreationalActivity activity, Date date, BigDecimal price) {
+		this.activity = activity;
+		this.date = date;
+		this.price = price;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public RecreationalActivity getActivity() {
+		return activity;
+	}
 }

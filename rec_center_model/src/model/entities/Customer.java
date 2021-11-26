@@ -28,12 +28,13 @@ public class Customer {
 	@GeneratedValue
 	protected int customerID;
 
-	@Column(name = "bronco_id")
+	@Column(name = "bronco_id", nullable = false)
 	private int broncoID;
 
 	@Column(name = "dob")
 	protected Date dateOfBirth;
 
+	@Column(nullable = false)
 	private String name;
 
 	@ManyToOne
@@ -48,4 +49,32 @@ public class Customer {
 	public Integer getID() {
 		return this.customerID;
 	}
+
+	public Customer() {
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getPhone() {
+		return phone;
+	}
+
+	public void setPhone(int phone) {
+		this.phone = phone;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
 }
