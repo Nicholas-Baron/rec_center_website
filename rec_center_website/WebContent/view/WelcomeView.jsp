@@ -12,12 +12,13 @@
 
 <body>
 	<h1 style="color: black;">
-		<c:out value="Welcome ${requestScope.Username}!" />
+		<c:out value="Welcome ${requestScope.username}!" />
 	</h1>
 
 	<input type="button" value="New Registration"
 		onclick="window.location='view/CreateRegistration.jsp'" />
-	<button>Current Reservations</button>
+	<input type="button" value="Current Reservations"
+		onclick="window.location='view/ViewRegistrations.jsp'" />
 
 </body>
 
