@@ -15,13 +15,8 @@
 		<c:out value="Welcome ${requestScope.Username}!" />
 	</h1>
 
-	<!--  
-	<button>
-		<a style="text-decoration: none;" href="CreateRegistration">
-			New Reservation</a>
-	</button>-->
-
-	<input type="button" value="load" onclick="window.location='view/CreateRegistration.jsp'" />
+	<input type="button" value="New Registration"
+		onclick="window.location='view/CreateRegistration.jsp'" />
 	<button>Current Reservations</button>
 
 </body>

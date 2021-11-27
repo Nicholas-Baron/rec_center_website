@@ -10,5 +10,27 @@
 </head>
 <body>
 
+	<h1>Create Reservation</h1>
+
+	<form action="${pageContext.request.contextPath}/create_registration"
+		method="post">
+		<input type="hidden" name="username"
+			value="<%=session.getAttribute("username")%>" />
+		<table bgcolor="#00ffff" width="600" height="80" align="center"
+			border="0">
+			<tr>
+				<td>Choose a date and time for the reservation:</td>
+				<td><input type="datetime-local" name="datetime" /></td>
+			</tr>
+			<tr>
+				<td><input type="submit" name="submit" value="Confirm" /></td>
+				<td align="right">
+					<button type="button" class="btn btn-primary"
+						onclick="window.history.back();">Cancel</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+
 </body>
 </html>
