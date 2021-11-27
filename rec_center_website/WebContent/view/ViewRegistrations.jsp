@@ -13,7 +13,7 @@
 	<h1>Current Reservations</h1>
 
 	<div height="200" style="overflow: scroll;">
-		<c:forEach var="reservation" items="${reservations}">
+		<c:forEach var="reservation" items="${requestScope.reservations}">
 			<div>${reservation}</div>
 
 		</c:forEach>

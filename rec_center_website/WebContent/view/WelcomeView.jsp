@@ -17,8 +17,12 @@
 
 	<input type="button" value="New Registration"
 		onclick="window.location='view/CreateRegistration.jsp'" />
-	<input type="button" value="Current Reservations"
-		onclick="window.location='view/ViewRegistrations.jsp'" />
+	<form action="${pageContext.request.contextPath}/view_registrations"
+		method="get">
+		<input type="hidden" name="username"
+			value="<%=session.getAttribute("username")%>" /> <input
+			type="submit" value="Current Reservations" />
+	</form>
 
 </body>
 

@@ -24,4 +24,12 @@
 		<servlet-name>CreateRegistration</servlet-name>
 		<url-pattern>/create_registration</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>ViewRegistrations</servlet-name>
+		<servlet-class>control.ViewRegistrationsControl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewRegistrations</servlet-name>
+		<url-pattern>/view_registrations</url-pattern>
+	</servlet-mapping>
 </web-app>
