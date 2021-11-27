@@ -7,7 +7,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>User Authentication</title>
+		<title>Bronco Recreation Complex Management (BRCM) Online System</title>
 	</head>
 
 	<body>
@@ -20,7 +20,7 @@
 				</tr>
 				<tr>
 				  <td><c:out value="Password: "></c:out></td>
-				  <td><input type="text" name="password"></td>
+				  <td><input type="password" name="password"></td>
 				</tr>
 		</table>
 		<table bgcolor="#00ffff" width="500" height="80" align="center" border="0">		

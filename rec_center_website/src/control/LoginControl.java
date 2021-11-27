@@ -32,7 +32,7 @@ public class LoginControl extends HttpServlet {
 			LoginBusiness.getInstance().loginUser(userName);
 				
 			request.setAttribute("Username", request.getParameter("username"));
-			address = "/view/LoginSuccessView.jsp";
+			address = "/view/WelcomeView.jsp";
 
 		} catch (MessageException e) {
 			if (e.getMessage().equals("Username not informed.")) {
