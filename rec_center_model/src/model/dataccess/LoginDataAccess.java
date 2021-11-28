@@ -7,8 +7,6 @@ import model.entities.Customer;
 
 public class LoginDataAccess {
 
-	private static final ConnectionFactory connectionFactory = new ConnectionFactory();
-
 	/**
 	 * Check if the customer exists by id.
 	 * 
@@ -17,7 +15,7 @@ public class LoginDataAccess {
 	 */
 	public boolean verifyCustomerExists(Customer customer) {
 
-		Session session = connectionFactory.getConnection();
+		Session session = ConnectionFactory.getInstance().getConnection();
 
 		Query<Customer> query = session.createQuery("select 1 from Customer c where c.id = :id",
 						Customer.class);
@@ -34,7 +32,7 @@ public class LoginDataAccess {
 	 */
 	public boolean verifyCustomerExists(String name) {
 
-		Session session = connectionFactory.getConnection();
+		Session session = ConnectionFactory.getInstance().getConnection();
 
 		Query<Customer> query = session.createQuery("select c from Customer c where c.name = :name",
 						Customer.class);
