@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.dataccess.LoginBusiness;
 import model.dataccess.MessageException;
+import model.dataccess.ReservationBusiness;
 
 @SuppressWarnings("serial")
 public class CreateRegistrationControl extends HttpServlet {
@@ -31,7 +31,8 @@ public class CreateRegistrationControl extends HttpServlet {
 
 			String userName = request.getParameter("username");
 			String datetime = request.getParameter("datetime");
-			System.out.println(userName + " reserved time " + datetime);
+
+			ReservationBusiness.getInstance().makeReservation(userName, datetime);
 
 			request.setAttribute("username", request.getParameter("username"));
 			address = "/view/WelcomeView.jsp";
@@ -39,12 +40,6 @@ public class CreateRegistrationControl extends HttpServlet {
 		} catch (MessageException e) {
 			if (e.getMessage().equals("Username not informed.")) {
 				request.setAttribute("ErrorLogin", "Username not informed.");
-				address = "/view/LoginView.jsp";
-			} else if (e.getMessage().equals("Password not informed.")) {
-				request.setAttribute("ErrorLogin", "Password not informed.");
-				address = "/view/LoginView.jsp";
-			} else if (e.getMessage().equals("Incorrect credentials.")) {
-				request.setAttribute("ErrorLogin", "Incorrect credentials.");
 				address = "/view/LoginView.jsp";
 			}
 		}

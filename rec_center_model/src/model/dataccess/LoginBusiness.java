@@ -16,7 +16,7 @@ public final class LoginBusiness {
 	public void loginUser(String username) throws MessageException {
 		if (username.equals("")) {
 			throw new MessageException("Username not informed.");
-		} 
+		}
 
 		if (!(new LoginDataAccess().verifyCustomerExists(username))) {
 			throw new MessageException("Incorrect credentials.");
