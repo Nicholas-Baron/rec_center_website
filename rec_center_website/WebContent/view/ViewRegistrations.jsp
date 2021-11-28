@@ -7,15 +7,36 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Bronco Recreation Complex Management (BRCM) Online System</title>
+<style>
+#list {
+	max-width: 500px;
+	max-height: 200px;
+	overflow: scroll;
+	margin: auto;
+}
+</style>
 </head>
 <body>
 
 	<h1>Current Reservations</h1>
 
-	<div height="200" style="overflow: scroll;">
+	<div id="list">
 		<c:forEach var="reservation" items="${requestScope.reservations}">
-			<div>${reservation}</div>
-
+			<table>
+				<caption>${reservation[0]}</caption>
+				<tr>
+					<td>Date</td>
+					<td>${reservation[1]}</td>
+				</tr>
+				<tr>
+					<td>Time</td>
+					<td>${reservation[2]}</td>
+				</tr>
+				<tr>
+					<td>Status</td>
+					<td>${reservation[3]}</td>
+				</tr>
+			</table>
 		</c:forEach>
 	</div>
 	<button type="button" onclick="window.history.back();">Main

@@ -1,6 +1,9 @@
 package model.dataccess;
 
 import java.sql.Timestamp;
+import java.util.List;
+
+import model.entities.Order;
 
 public class ReservationBusiness {
 	private ReservationBusiness() {
@@ -27,5 +30,15 @@ public class ReservationBusiness {
 		if (!dataAccess.createReservation(username, timestamp)) {
 			throw new MessageException("Incorrect credentials.");
 		}
+	}
+
+	public List<Order> getReservations(String username) {
+		if (username.equals("")) {
+			throw new MessageException("Username not informed.");
+		}
+
+		ReservationDataAccess dataAccess = new ReservationDataAccess();
+
+		return dataAccess.listReservations(username);
 	}
 }

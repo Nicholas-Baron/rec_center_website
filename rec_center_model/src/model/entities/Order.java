@@ -75,4 +75,8 @@ public class Order {
 	public BigDecimal getTotalAfterDiscount() {
 		return totalAfterDiscount;
 	}
+
+	public OrderStatus getStatus() {
+		return status;
+	}
 }
