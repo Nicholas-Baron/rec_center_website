@@ -37,7 +37,7 @@ public class Order {
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
 
-	@Column(nullable = false, precision = 2, scale = 10, name = "total")
+	@Column(nullable = false, precision = 10, scale = 2, name = "total")
 	private BigDecimal totalAfterDiscount;
 
 	@Enumerated(EnumType.STRING)

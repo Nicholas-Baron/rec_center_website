@@ -22,7 +22,7 @@ public class HistoricalPrice {
 	@Column(nullable = false)
 	private Date date;
 
-	@Column(scale = 2, precision = 10, nullable = false)
+	@Column(scale = 10, precision = 2, nullable = false)
 	private BigDecimal price;
 
 	@ManyToOne
