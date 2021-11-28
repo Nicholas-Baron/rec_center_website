@@ -20,6 +20,18 @@ public final class ConnectionFactory {
 
 	private SessionFactory sessionFactory;
 
+	private ConnectionFactory() {
+	}
+
+	private static ConnectionFactory instance = null;
+
+	public static ConnectionFactory getInstance() {
+		if (instance == null)
+			instance = new ConnectionFactory();
+
+		return instance;
+	}
+
 	public Session getConnection() {
 		if (sessionFactory == null) {
 			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()

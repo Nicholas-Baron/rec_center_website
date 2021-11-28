@@ -92,7 +92,7 @@ public class LoginView extends JFrame implements ActionListener {
 				
 				LoginBusiness.getInstance().loginUser(userName);
 
-				new LoginSuccessView(txtUserName.getText());
+				new WelcomeView(txtUserName.getText());
 				dispose();
 
 			} catch (MessageException e) {

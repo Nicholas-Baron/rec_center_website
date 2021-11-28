@@ -8,13 +8,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class LoginSuccessView {
+public class WelcomeView {
 	
 	private JLabel lblUserName;
 	
 	private JPanel panel1;
 	
-	public LoginSuccessView (String userName) {
+	public WelcomeView (String userName) {
 		JFrame frame = new JFrame();
 		this.lblUserName = new JLabel("Welcome " + userName + "!");
 		this.panel1 = new JPanel();

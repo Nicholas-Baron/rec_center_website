@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -35,8 +37,12 @@ public class Order {
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
 
-	@Column(nullable = false, precision = 2, scale = 10, name = "total")
+	@Column(nullable = false, precision = 10, scale = 2, name = "total")
 	private BigDecimal totalAfterDiscount;
+
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private OrderStatus status;
 
 	public int activityCount() {
 		return activities.size();
@@ -46,11 +52,12 @@ public class Order {
 	}
 
 	public Order(Customer customer, List<RecreationalActivity> activities, Timestamp datetime,
-					BigDecimal price) {
+					BigDecimal price, OrderStatus status) {
 		this.customer = customer;
 		this.activities = activities;
 		this.datetime = datetime;
 		this.totalAfterDiscount = price;
+		this.status = status;
 	}
 
 	public Timestamp getDatetime() {
@@ -67,5 +74,9 @@ public class Order {
 
 	public BigDecimal getTotalAfterDiscount() {
 		return totalAfterDiscount;
+	}
+
+	public OrderStatus getStatus() {
+		return status;
 	}
 }
