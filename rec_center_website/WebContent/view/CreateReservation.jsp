@@ -32,7 +32,7 @@
 			</tr>
 			<tr>
 				<td><input type="submit" name="submit" value="Confirm"
-					onclick="window.location = 'view/WelcomeView.jsp'" /></td>
+					onclick="window.location = 'view/ThankYou.jsp'" /></td>
 				<td align="right">
 					<button type="button" class="btn btn-primary"
 						onclick="window.history.back();">Cancel</button>

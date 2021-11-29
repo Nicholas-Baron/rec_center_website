@@ -33,16 +33,8 @@ public class LoginControl extends HttpServlet {
 			address = "/view/WelcomeView.jsp";
 
 		} catch (MessageException e) {
-			if (e.getMessage().equals("Username not informed.")) {
-				request.setAttribute("ErrorLogin", "Username not informed.");
-				address = "/view/LoginView.jsp";
-			} else if (e.getMessage().equals("Password not informed.")) {
-				request.setAttribute("ErrorLogin", "Password not informed.");
-				address = "/view/LoginView.jsp";
-			} else if (e.getMessage().equals("Incorrect credentials.")) {
-				request.setAttribute("ErrorLogin", "Incorrect credentials.");
-				address = "/view/LoginView.jsp";
-			}
+			request.setAttribute("ErrorLogin", e.getMessage());
+			address = "/view/LoginView.jsp";
 		}
 
 		RequestDispatcher rd = request.getRequestDispatcher(address);
