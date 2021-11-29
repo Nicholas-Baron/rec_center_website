@@ -5,6 +5,11 @@ import javax.swing.JScrollBar;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ActivitiesView extends JPanel {
 	private JTable table;
@@ -12,9 +17,10 @@ public class ActivitiesView extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ActivitiesView() {
+	public ActivitiesView(JFrame contentFrame, String userName) {
 		setLayout(null);
 		
+		JPanel thisPanel = this;
 		
 		
 
@@ -41,7 +47,37 @@ public class ActivitiesView extends JPanel {
 		
 		table = new JTable(data, columnNames);
 		add(table);
-		table.setBounds(75, 90, 322, 80);
+		table.setBounds(56, 89, 322, 80);
+		
+		JButton btnNewButton = new JButton("Create Activity");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CreateActivity ca = new CreateActivity(contentFrame, userName);
+				ca.setVisible(true);
+				thisPanel.setVisible(false);
+				contentFrame.remove(thisPanel);
+				contentFrame.setContentPane(ca);
+			}
+		});
+		btnNewButton.setBounds(36, 259, 135, 23);
+		add(btnNewButton);
+		
+		JButton btnChangePrice = new JButton("Change Price");
+		btnChangePrice.setBounds(249, 259, 148, 23);
+		add(btnChangePrice);
+		
+		JButton btnReturnHome = new JButton("Return Home");
+		btnReturnHome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Home homePage = new Home(contentFrame, userName);
+				homePage.setVisible(true);
+				thisPanel.setVisible(false);
+				contentFrame.remove(thisPanel);
+				contentFrame.setContentPane(homePage);
+			}
+		});
+		btnReturnHome.setBounds(271, 11, 148, 23);
+		add(btnReturnHome);
 
 	}
 }

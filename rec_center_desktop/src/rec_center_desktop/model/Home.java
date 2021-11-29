@@ -48,7 +48,7 @@ public class Home extends JPanel {
 		JButton btnAcrivitiesList = new JButton("Activities List");
 		btnAcrivitiesList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ActivitiesView av = new ActivitiesView();
+				ActivitiesView av = new ActivitiesView(contentFrame, currentUser);
 				av.setVisible(true);
 				thisPanel.setVisible(false);
 				contentFrame.remove(thisPanel);
