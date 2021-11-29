@@ -12,7 +12,7 @@
 
 	<h1>Create Reservation</h1>
 
-	<form action="${pageContext.request.contextPath}/create_registration"
+	<form action="${pageContext.request.contextPath}/create_reservation"
 		method="post">
 		<input type="hidden" name="username"
 			value="<%=session.getAttribute("username")%>" />
@@ -23,7 +23,8 @@
 				<td><input type="datetime-local" name="datetime" /></td>
 			</tr>
 			<tr>
-				<td><input type="submit" name="submit" value="Confirm" /></td>
+				<td><input type="submit" name="submit" value="Confirm"
+					onclick="window.location.href = 'view/WelcomeView.jsp'" /></td>
 				<td align="right">
 					<button type="button" class="btn btn-primary"
 						onclick="window.history.back();">Cancel</button>

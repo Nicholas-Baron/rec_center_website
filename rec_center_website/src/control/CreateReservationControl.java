@@ -12,7 +12,7 @@ import model.dataccess.MessageException;
 import model.dataccess.ReservationBusiness;
 
 @SuppressWarnings("serial")
-public class CreateRegistrationControl extends HttpServlet {
+public class CreateReservationControl extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)

@@ -17,19 +17,19 @@
 		<url-pattern>/login</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>CreateRegistration</servlet-name>
-		<servlet-class>control.CreateRegistrationControl</servlet-class>
+		<servlet-name>CreateReservation</servlet-name>
+		<servlet-class>control.CreateReservationControl</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>CreateRegistration</servlet-name>
-		<url-pattern>/create_registration</url-pattern>
+		<servlet-name>CreateReservation</servlet-name>
+		<url-pattern>/create_reservation</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>ViewRegistrations</servlet-name>
-		<servlet-class>control.ViewRegistrationsControl</servlet-class>
+		<servlet-name>ViewReservations</servlet-name>
+		<servlet-class>control.ViewReservationsControl</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>ViewRegistrations</servlet-name>
-		<url-pattern>/view_registrations</url-pattern>
+		<servlet-name>ViewReservations</servlet-name>
+		<url-pattern>/view_reservations</url-pattern>
 	</servlet-mapping>
 </web-app>

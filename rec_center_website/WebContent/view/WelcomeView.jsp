@@ -15,9 +15,9 @@
 		<c:out value="Welcome ${requestScope.username}!" />
 	</h1>
 
-	<input type="button" value="New Registration"
-		onclick="window.location='view/CreateRegistration.jsp'" />
-	<form action="${pageContext.request.contextPath}/view_registrations"
+	<input type="button" value="New Reservation"
+		onclick="window.location='view/CreateReservation.jsp'" />
+	<form action="${pageContext.request.contextPath}/view_reservations"
 		method="get">
 		<input type="hidden" name="username"
 			value="<%=session.getAttribute("username")%>" /> <input
