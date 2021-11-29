@@ -21,7 +21,16 @@ public class Student extends Customer {
 	@Column(nullable = false)
 	private String minor;
 
-	public Student() {
+	public Student(int broncoID, Date DOB, String fullname, int phone, Date enterDate, Date gradDate, String major, String minor, Address address) {
+		this.enterDate = enterDate;
+		this.gradDate = gradDate;
+		this.address = address;
+		this.major = major;
+		this.minor = minor;
+		this.dateOfBirth = DOB;
+		this.setPhone(phone);
+		this.setName(fullname);
+		this.setBroncoId(broncoID);
 	}
 
 	public Date getEnterDate() {

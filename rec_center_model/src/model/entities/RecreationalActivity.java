@@ -25,7 +25,7 @@ public class RecreationalActivity {
 	@Column(nullable = false)
 	private String name;
 
-	@Column(scale = 10, precision = 2, nullable = false)
+	@Column(scale = 2, precision = 10, nullable = false)
 	private BigDecimal price;
 
 	@OneToMany(mappedBy = "activity")
