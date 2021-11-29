@@ -1,6 +1,7 @@
 package control;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,8 +18,13 @@ public class CreateReservationControl extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 					throws ServletException, IOException {
-		doPost(req, resp);
+		var activityNames = ReservationBusiness.getInstance().getActivites().stream()
+						.map(a -> a.getName()).toArray();
 
+		req.setAttribute("activities", Arrays.toString(activityNames).replace("[", "").replace("]", ""));
+
+		RequestDispatcher rd = req.getRequestDispatcher("/view/CreateReservation.jsp");
+		rd.forward(req, resp);
 	}
 
 	@Override
@@ -27,10 +33,10 @@ public class CreateReservationControl extends HttpServlet {
 
 		String address = "";
 
-		try {
+		String userName = request.getParameter("username");
+		String datetime = request.getParameter("datetime");
 
-			String userName = request.getParameter("username");
-			String datetime = request.getParameter("datetime");
+		try {
 
 			ReservationBusiness.getInstance().makeReservation(userName, datetime);
 

@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import model.entities.Order;
+import model.entities.RecreationalActivity;
 
 public class ReservationBusiness {
 	private ReservationBusiness() {
@@ -40,5 +41,9 @@ public class ReservationBusiness {
 		ReservationDataAccess dataAccess = new ReservationDataAccess();
 
 		return dataAccess.listReservations(username);
+	}
+
+	public List<RecreationalActivity> getActivites() {
+		return new ReservationDataAccess().listActivities();
 	}
 }

@@ -23,8 +23,16 @@
 				<td><input type="datetime-local" name="datetime" /></td>
 			</tr>
 			<tr>
+				<td>Choose the activites to reserve:</td>
+				<td><select multiple>
+						<c:forEach var="activity" items="${requestScope.activities} ">
+							<option value="${activity}">${activity}</option>
+						</c:forEach>
+				</select></td>
+			</tr>
+			<tr>
 				<td><input type="submit" name="submit" value="Confirm"
-					onclick="window.location.href = 'view/WelcomeView.jsp'" /></td>
+					onclick="window.location = 'view/WelcomeView.jsp'" /></td>
 				<td align="right">
 					<button type="button" class="btn btn-primary"
 						onclick="window.history.back();">Cancel</button>

@@ -12,6 +12,7 @@ import org.hibernate.query.Query;
 import model.entities.Customer;
 import model.entities.Order;
 import model.entities.OrderStatus;
+import model.entities.RecreationalActivity;
 
 public class ReservationDataAccess {
 
@@ -62,6 +63,16 @@ public class ReservationDataAccess {
 		Query<Order> query = session.createQuery("select o from Order o where o.customer=:customer",
 						Order.class);
 		query.setParameter("customer", c);
+
+		return query.getResultList();
+	}
+
+	public List<RecreationalActivity> listActivities() {
+
+		Session session = ConnectionFactory.getInstance().getConnection();
+
+		Query<RecreationalActivity> query = session.createQuery(
+						"select r from RecreationalActivity r", RecreationalActivity.class);
 
 		return query.getResultList();
 	}
