@@ -15,9 +15,7 @@ public class ActivitiesView extends JPanel {
 	public ActivitiesView() {
 		setLayout(null);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(56, 259, 341, -197);
-		add(scrollPane);
+		
 		
 
 		String[] columnNames = {"First Name",
@@ -37,9 +35,13 @@ public class ActivitiesView extends JPanel {
 			    {"Joe", "Brown",
 			     "Pool", (10)}
 			};
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(56, 259, 341, -197);
+		add(scrollPane);
 		
 		table = new JTable(data, columnNames);
-		table.setBounds(67, 249, 310, -183);
 		add(table);
+		table.setBounds(75, 90, 322, 80);
+
 	}
 }
