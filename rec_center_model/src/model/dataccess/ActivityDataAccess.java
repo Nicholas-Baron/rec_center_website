@@ -1,5 +1,6 @@
 package model.dataccess;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -16,5 +17,15 @@ public class ActivityDataAccess {
 						"select r from RecreationalActivity r", RecreationalActivity.class);
 
 		return query.getResultList();
+	}
+
+	public void createActivity(String name, BigDecimal price) {
+
+		Session session = ConnectionFactory.getInstance().getConnection();
+		var transaction = session.beginTransaction();
+
+		session.save(new RecreationalActivity(name, price));
+
+		transaction.commit();
 	}
 }

@@ -1,5 +1,6 @@
 package model.dataccess;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import model.entities.RecreationalActivity;
@@ -15,8 +16,19 @@ public class ActivityBusiness {
 			instance = new ActivityBusiness();
 		return instance;
 	}
-	
+
 	public List<RecreationalActivity> getActivities() {
 		return new ActivityDataAccess().listActivities();
+	}
+
+	public void makeActivity(String name, String price) throws MessageException {
+		if (name.isEmpty())
+			throw new MessageException("activity name is empty");
+
+		try {
+			new ActivityDataAccess().createActivity(name, new BigDecimal(price));
+		} catch (NumberFormatException e) {
+			throw new MessageException(e.getMessage() + "[" + price + "]");
+		}
 	}
 }
