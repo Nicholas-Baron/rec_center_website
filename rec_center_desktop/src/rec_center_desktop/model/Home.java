@@ -35,7 +35,7 @@ public class Home extends JPanel {
 		JButton btnNewOrder = new JButton("Schedule Visit");
 		btnNewOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VisitRegistration visitRegistration = new VisitRegistration(currentUser);
+				VisitRegistration visitRegistration = new VisitRegistration(contentFrame, currentUser);
 				visitRegistration.setVisible(true);
 				thisPanel.setVisible(false);
 				contentFrame.remove(thisPanel);
