@@ -19,7 +19,7 @@ public class CreateReservationControl extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 					throws ServletException, IOException {
-		var activityNames = ReservationBusiness.getInstance().getActivites().stream()
+		var activityNames = ReservationBusiness.getInstance().getActivities().stream()
 						.map(a -> a.getName()).toArray();
 
 		req.setAttribute("activities",
