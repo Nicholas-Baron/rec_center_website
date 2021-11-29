@@ -23,12 +23,9 @@ public class LoginControl extends HttpServlet {
 					throws ServletException, IOException {
 
 		String address = "";
+		String userName = request.getParameter("username");
 
 		try {
-
-			String userName = request.getParameter("username");
-			String password = request.getParameter("password");
-
 			LoginBusiness.getInstance().loginUser(userName);
 
 			request.setAttribute("username", userName);
