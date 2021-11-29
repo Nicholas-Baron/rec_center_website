@@ -5,14 +5,18 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 import java.util.Vector;
 
 import javax.swing.JTextField;
 import javax.swing.text.DateFormatter;
 import javax.swing.text.MaskFormatter;
+
+import model.dataccess.ReservationBusiness;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.border.EtchedBorder;
@@ -25,6 +29,8 @@ import javax.swing.JList;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VisitRegistration extends JPanel {
 	private JFormattedTextField dateField;
@@ -67,6 +73,7 @@ public class VisitRegistration extends JPanel {
 		DateFormat tf = new SimpleDateFormat("HH:mm");
 		tf.setTimeZone(TimeZone.getTimeZone("GMT"));
 		timeField = new JFormattedTextField(tf);
+		timeField.setText("12:00");
 		timeField.setBounds(71, 30, 209, 20);
 		panel.add(timeField);
 		
@@ -142,6 +149,22 @@ public class VisitRegistration extends JPanel {
 		add(lblNewLabel_3_2);
 		
 		JButton btnNewButton = new JButton("Submit");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ReservationBusiness res = ReservationBusiness.getInstance();
+				String date = dateField.getText().trim();
+				String time = timeField.getText().trim();
+				String dateTime = date + "T" + time;
+				List<String> activities = new ArrayList<String>();
+				activities.add("wgihts");	
+				activities.add("togo");
+				try {
+					res.makeReservation(currentUser, dateTime, activities);
+				} catch (Exception ex){
+					System.out.println(ex.getMessage());
+				}
+			}
+		});
 		btnNewButton.setBounds(282, 266, 89, 23);
 		add(btnNewButton);
 		

@@ -69,7 +69,7 @@ public class StudentRegister extends JPanel {
 		registerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ReservationBusiness resBusiness = ReservationBusiness.getInstance();
-				resBusiness.makeReservation("bob", "2021-12-12 09:30:00.000");
+				//resBusiness.makeReservation("bob", "2021-12-12 09:30:00.000");
 			}
 		});
 		registerButton.setBounds(178, 225, 89, 23);

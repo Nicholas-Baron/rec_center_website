@@ -34,7 +34,7 @@ public class Login extends JPanel {
 		
 		usernameField = new JTextField();
 		usernameField.setBounds(187, 123, 157, 20);
-		usernameField.setText("\r\n");
+		usernameField.setText("");
 		add(usernameField);
 		usernameField.setColumns(10);
 		
@@ -50,12 +50,13 @@ public class Login extends JPanel {
 				try {
 					LoginBusiness loginBusiness = LoginBusiness.getInstance();
 					
-					success = loginBusiness.loginUser(usernameField.getText());
+					success = loginBusiness.loginUser(usernameField.getText().trim());
 				} catch (Exception ex) {
 					exceptionLabel.setText(ex.getMessage());
+					exceptionLabel.setVisible(true);
 				}
 				// if you see this comment, reject the PR
-				success = true; // delete this line
+				//success = true; // delete this line
 				if(success) {
 					Home homePage = new Home(contentFrame, usernameField.getText());
 					homePage.setVisible(true);
