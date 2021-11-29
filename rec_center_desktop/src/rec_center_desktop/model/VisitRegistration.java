@@ -18,6 +18,7 @@ import javax.swing.text.MaskFormatter;
 
 import model.dataccess.MessageException;
 import model.dataccess.ReservationBusiness;
+import model.entities.OrderStatus;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -165,7 +166,7 @@ public class VisitRegistration extends JPanel {
 				activities.add("togo");
 				boolean success = false;
 				try {
-					res.makeReservation(currentUser, dateTime, new ArrayList<>());		
+					res.makeReservation(currentUser, dateTime, new ArrayList<>(), OrderStatus.Counter);		
 					success = true;
 				} catch (MessageException ex){
 					System.out.println(ex.getMessage());

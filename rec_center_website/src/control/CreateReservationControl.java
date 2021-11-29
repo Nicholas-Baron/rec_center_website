@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.dataccess.ActivityBusiness;
 import model.dataccess.MessageException;
 import model.dataccess.ReservationBusiness;
+import model.entities.OrderStatus;
 
 @SuppressWarnings("serial")
 public class CreateReservationControl extends HttpServlet {
@@ -37,14 +38,16 @@ public class CreateReservationControl extends HttpServlet {
 		String userName = request.getSession().getAttribute("username").toString();
 		String datetime = request.getParameter("datetime");
 		String[] activities = request.getParameterValues("activities");
-		
+
 		System.out.println(userName);
 
 		String redirect = "";
 
 		try {
-			ReservationBusiness.getInstance().makeReservation(userName, datetime, Arrays
-							.stream(activities).map(s -> s.trim()).collect(Collectors.toList()));
+			ReservationBusiness.getInstance().makeReservation(
+							userName, datetime, Arrays.stream(activities).map(s -> s.trim())
+											.collect(Collectors.toList()),
+							OrderStatus.OnlinePending);
 
 			request.setAttribute("username", request.getParameter("username"));
 			redirect = "/view/ThankYou.jsp";

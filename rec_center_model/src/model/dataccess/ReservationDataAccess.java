@@ -33,8 +33,8 @@ public class ReservationDataAccess {
 		return query.uniqueResult() != null;
 	}
 
-	public void createReservation(String username, Timestamp timestamp,
-					List<String> activityNames) {
+	public void createReservation(String username, Timestamp timestamp, List<String> activityNames,
+					OrderStatus status) {
 
 		Session session = ConnectionFactory.getInstance().getConnection();
 		Transaction transaction = session.beginTransaction();
@@ -54,7 +54,7 @@ public class ReservationDataAccess {
 		}
 
 		Order order = new Order(query.uniqueResult(), activities, timestamp, new BigDecimal(0),
-						OrderStatus.OnlinePending);
+						status);
 
 		session.save(order);
 
