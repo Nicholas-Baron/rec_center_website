@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.text.DateFormatter;
 import javax.swing.text.MaskFormatter;
 
+import model.dataccess.MessageException;
 import model.dataccess.ReservationBusiness;
 
 import javax.swing.JFormattedTextField;
@@ -63,12 +64,13 @@ public class VisitRegistration extends JPanel {
 		JLabel lblNewLabel_1 = new JLabel("Time:");
 		lblNewLabel_1.setBounds(8, 33, 41, 14);
 		panel.add(lblNewLabel_1);
-		DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		DateFormatter df = new DateFormatter(format);
 		dateField = new JFormattedTextField(df);
 		dateField.setBounds(71, 5, 209, 20);
 		Calendar cal = Calendar.getInstance();
-		cal.set(2021, 01, 01);
+		cal.clear();
+		cal.set(2021, Calendar.JANUARY, 01);
 		dateField.setValue(cal.getTime());
 		
 		panel.add(dateField);
@@ -163,12 +165,11 @@ public class VisitRegistration extends JPanel {
 				activities.add("togo");
 				boolean success = false;
 				try {
-					//success = res.makeReservation(currentUser, dateTime, activities);		
-				} catch (Exception ex){
+					res.makeReservation(currentUser, dateTime, new ArrayList<>());		
+					success = true;
+				} catch (MessageException ex){
 					System.out.println(ex.getMessage());
 				}
-				//remove this
-				success = true;
 				if (success) {
 					VisitSuccess vs = new VisitSuccess(contentFrame, currentUser);
 					vs.setVisible(true);
