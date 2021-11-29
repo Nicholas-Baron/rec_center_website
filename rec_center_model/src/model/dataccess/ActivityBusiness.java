@@ -33,6 +33,17 @@ public class ActivityBusiness {
 		}
 	}
 
+	public void updateActivityPrice(String name, String price) throws MessageException {
+		if (name.isEmpty())
+			throw new MessageException("activity name is empty");
+
+		try {
+			new ActivityDataAccess().updatePrice(name, new BigDecimal(price));
+		} catch (NumberFormatException e) {
+			throw new MessageException(e.getMessage() + "[" + price + "]");
+		}
+	}
+
 	public List<HistoricalPrice> getPriceHistory(String activity) {
 		if (activity.isEmpty())
 			throw new MessageException("activity name is empty");
