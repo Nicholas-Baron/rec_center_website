@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.dataccess.ActivityBusiness;
 import model.dataccess.MessageException;
 import model.dataccess.ReservationBusiness;
 
@@ -19,7 +20,7 @@ public class CreateReservationControl extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 					throws ServletException, IOException {
-		var activityNames = ReservationBusiness.getInstance().getActivities().stream()
+		var activityNames = ActivityBusiness.getInstance().getActivities().stream()
 						.map(a -> a.getName()).toArray();
 
 		req.setAttribute("activities",

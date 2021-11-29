@@ -77,13 +77,4 @@ public class ReservationDataAccess {
 		return query.getResultList();
 	}
 
-	public List<RecreationalActivity> listActivities() {
-
-		Session session = ConnectionFactory.getInstance().getConnection();
-
-		Query<RecreationalActivity> query = session.createQuery(
-						"select r from RecreationalActivity r", RecreationalActivity.class);
-
-		return query.getResultList();
-	}
 }

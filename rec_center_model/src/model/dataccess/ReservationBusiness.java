@@ -50,7 +50,4 @@ public class ReservationBusiness {
 		return dataAccess.listReservations(username);
 	}
 
-	public List<RecreationalActivity> getActivities() {
-		return new ReservationDataAccess().listActivities();
-	}
 }

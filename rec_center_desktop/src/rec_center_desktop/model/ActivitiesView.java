@@ -1,12 +1,8 @@
 package src.rec_center_desktop.model;
 
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-
-import model.dataccess.ReservationBusiness;
-
+import model.dataccess.ActivityBusiness;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -30,7 +26,7 @@ public class ActivitiesView extends JPanel {
 
 		String[] columnNames = { "Activity", "Price" };
 
-		List<Object[]> dataStrings = ReservationBusiness.getInstance().getActivities().stream()
+		List<Object[]> dataStrings = ActivityBusiness.getInstance().getActivities().stream()
 						.map(a -> new Object[] { a.getName(), a.getPrice().toPlainString() })
 						.collect(Collectors.toList());
 		
