@@ -9,25 +9,20 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue(value = CustomerType.Values.ProfessorStudent)
 public class ProfessorStudent extends Customer {
-	@Column(name = "enter_date", nullable = false)
+	@Column(name = "enter_date")
 	protected Date enterDate;
 
-	@Column(name = "grad_date", nullable = false)
+	@Column(name = "grad_date")
 	protected Date gradDate;
 
-	@Column(nullable = false)
 	private String major;
 
-	@Column(nullable = false)
 	private String minor;
 
-	@Column(nullable = false)
 	private String department;
 
-	@Column(nullable = false)
 	private String office;
 
-	@Column(nullable = false)
 	private String research;
 
 	public ProfessorStudent() {
