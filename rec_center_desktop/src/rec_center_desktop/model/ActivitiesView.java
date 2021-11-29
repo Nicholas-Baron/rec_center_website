@@ -12,9 +12,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
 
 public class ActivitiesView extends JPanel {
 	private JTable table;
+	private JTextField txtEnterActivityName;
+	private JTextField historyActivityField;
 
 	/**
 	 * Create the panel.
@@ -48,13 +51,19 @@ public class ActivitiesView extends JPanel {
 				contentFrame.setContentPane(ca);
 			}
 		});
-		btnNewButton.setBounds(36, 259, 135, 23);
+		btnNewButton.setBounds(21, 259, 135, 23);
 		add(btnNewButton);
 		
-		JButton btnChangePrice = new JButton("Change Price");
+		txtEnterActivityName = new JTextField();
+		txtEnterActivityName.setText("Enter activity name");
+		txtEnterActivityName.setBounds(297, 260, 135, 20);
+		add(txtEnterActivityName);
+		txtEnterActivityName.setColumns(10);
+		
+		JButton btnChangePrice = new JButton("Change Price: ");
 		btnChangePrice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String activity = "Weightlifting";
+				String activity = txtEnterActivityName.getText();
 				ChangePrice ca = new ChangePrice(contentFrame, userName, activity);
 				ca.setVisible(true);
 				thisPanel.setVisible(false);
@@ -62,7 +71,7 @@ public class ActivitiesView extends JPanel {
 				contentFrame.setContentPane(ca);
 			}
 		});
-		btnChangePrice.setBounds(249, 259, 148, 23);
+		btnChangePrice.setBounds(166, 259, 121, 23);
 		add(btnChangePrice);
 		
 		JButton btnReturnHome = new JButton("Return Home");
@@ -77,6 +86,26 @@ public class ActivitiesView extends JPanel {
 		});
 		btnReturnHome.setBounds(271, 11, 148, 23);
 		add(btnReturnHome);
+		
+		JButton btnPriceHistory = new JButton("Price History: ");
+		btnPriceHistory.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String activity = txtEnterActivityName.getText();
+				ActivityPriceHistory ca = new ActivityPriceHistory(contentFrame, userName, activity);
+				ca.setVisible(true);
+				thisPanel.setVisible(false);
+				contentFrame.remove(thisPanel);
+				contentFrame.setContentPane(ca);
+			}
+		});
+		btnPriceHistory.setBounds(166, 225, 121, 23);
+		add(btnPriceHistory);
+		
+		historyActivityField = new JTextField();
+		historyActivityField.setText("Enter activity name");
+		historyActivityField.setColumns(10);
+		historyActivityField.setBounds(297, 226, 135, 20);
+		add(historyActivityField);
 
 	}
 }

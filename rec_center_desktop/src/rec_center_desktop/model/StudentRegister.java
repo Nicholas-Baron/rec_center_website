@@ -78,6 +78,7 @@ public class StudentRegister extends JPanel {
 				} catch (Exception ex) {
 					
 				}
+				
 			}
 		});
 		registerButton.setBounds(176, 266, 89, 23);

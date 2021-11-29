@@ -4,6 +4,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import model.dataccess.ActivityBusiness;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -40,6 +43,7 @@ public class ChangePrice extends JPanel {
 		JButton btnNewButton = new JButton("Submit");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//ActivityBusiness ab = ActivityBusiness.getInstance();
 				PriceChangeSuccess homePage = new PriceChangeSuccess(contentFrame, currentUser);
 				homePage.setVisible(true);
 				thisPanel.setVisible(false);

@@ -1,37 +1,61 @@
 package src.rec_center_desktop.model;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
+import model.dataccess.ActivityBusiness;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ActivityPriceHistory extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public ActivityPriceHistory() {
+	public ActivityPriceHistory(JFrame contentFrame, String userName, String activity) {
+		
+		JTable table;
+		
 		setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Activity Price History");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 21));
-		lblNewLabel.setBounds(35, 11, 220, 26);
-		add(lblNewLabel);
+		JPanel thisPanel = this;
+
+		String[] columnNames = { "Price", "Date" };
 		
-		JLabel lblNewLabel_1 = new JLabel("Activity Name: ");
-		lblNewLabel_1.setBounds(35, 69, 98, 14);
-		add(lblNewLabel_1);
+		List<Object[]> dataStrings = ActivityBusiness.getInstance().getPriceHistory(activity).stream()
+						.map(a -> new Object[] { a.getPrice().toPlainString(), a.getDate() })
+						.collect(Collectors.toList());
 		
-		JLabel lblNewLabel_2 = new JLabel("Date: ");
-		lblNewLabel_2.setBounds(140, 137, 46, 14);
-		add(lblNewLabel_2);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(56, 259, 341, -197);
+		add(scrollPane);
 		
-		JLabel lblNewLabel_2_1 = new JLabel("Price: ");
-		lblNewLabel_2_1.setBounds(221, 137, 46, 14);
-		add(lblNewLabel_2_1);
+		table = new JTable(Arrays.copyOf(dataStrings.toArray(), dataStrings.size(), Object[][].class), columnNames);
+		add(table);
+		table.setBounds(56, 89, 322, 80);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("Current Price:");
-		lblNewLabel_1_1.setBounds(191, 69, 98, 14);
-		add(lblNewLabel_1_1);
+		JButton btnReturnHome = new JButton("Return Activities");
+		btnReturnHome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ActivitiesView av = new ActivitiesView(contentFrame, userName);
+				av.setVisible(true);
+				thisPanel.setVisible(false);
+				contentFrame.remove(thisPanel);
+				contentFrame.setContentPane(av);
+			}
+		});
+		btnReturnHome.setBounds(144, 247, 148, 23);
+		add(btnReturnHome);
+
 		
 	}
 
