@@ -73,7 +73,7 @@ public class Login extends JPanel {
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				usernameField.setText("");
-				UserRegister userRegister = new UserRegister();
+				UserRegister userRegister = new UserRegister(contentFrame);
 				userRegister.setVisible(true);
 				thisPanel.setVisible(false);
 				contentFrame.remove(thisPanel);

@@ -2,58 +2,67 @@ package rec_center_desktop.model;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import model.entities.Address;
+
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class UserRegister extends JPanel {
-	private JTextField textField_4;
-	private JTextField textField;
-	private JTextField textField_2;
-	private JTextField textField_1;
+	private JTextField numberField;
+	private JTextField fullnameField;
+	private JTextField DOBField;
+	private JTextField phoneField;
 	private JLabel lblAddress;
 	private JLabel lblStreet;
-	private JTextField textField_3;
-	private JTextField textField_5;
+	private JTextField streetField;
+	private JTextField city;
 	private JLabel lblCity;
 	private JLabel lblState;
-	private JTextField textField_6;
+	private JTextField state;
 	private JLabel lblZip;
-	private JTextField textField_7;
+	private JTextField zip;
+	private JPanel thisPanel;
 
 	/**
 	 * Create the panel.
 	 */
-	public UserRegister() {
+	public UserRegister(JFrame contentFrame) {
 		setLayout(null);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(127, 157, 43, 20);
-		add(textField_4);
-		textField_4.setColumns(10);
+		thisPanel = this;
+		numberField = new JTextField();
+		numberField.setBounds(127, 157, 43, 20);
+		add(numberField);
+		numberField.setColumns(10);
 		
-		textField = new JTextField();
-		textField.setBounds(127, 84, 235, 20);
-		add(textField);
-		textField.setColumns(10);
+		fullnameField = new JTextField();
+		fullnameField.setBounds(127, 84, 235, 20);
+		add(fullnameField);
+		fullnameField.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Full Name");
 		lblNewLabel.setBounds(77, 87, 53, 14);
 		add(lblNewLabel);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(127, 121, 79, 20);
-		add(textField_2);
+		DOBField = new JTextField();
+		DOBField.setColumns(10);
+		DOBField.setBounds(127, 121, 79, 20);
+		add(DOBField);
 		
 		JLabel lblDob = new JLabel("DOB");
 		lblDob.setBounds(77, 124, 53, 14);
 		add(lblDob);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(254, 121, 108, 20);
-		add(textField_1);
+		phoneField = new JTextField();
+		phoneField.setColumns(10);
+		phoneField.setBounds(254, 121, 108, 20);
+		add(phoneField);
 		
 		JLabel lblPhone = new JLabel("Phone");
 		lblPhone.setBounds(216, 124, 53, 14);
@@ -67,15 +76,15 @@ public class UserRegister extends JPanel {
 		lblStreet.setBounds(180, 160, 53, 14);
 		add(lblStreet);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(216, 157, 146, 20);
-		add(textField_3);
+		streetField = new JTextField();
+		streetField.setColumns(10);
+		streetField.setBounds(216, 157, 146, 20);
+		add(streetField);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(126, 193, 56, 20);
-		add(textField_5);
+		city = new JTextField();
+		city.setColumns(10);
+		city.setBounds(126, 193, 56, 20);
+		add(city);
 		
 		lblCity = new JLabel("City");
 		lblCity.setBounds(76, 196, 53, 14);
@@ -85,23 +94,33 @@ public class UserRegister extends JPanel {
 		lblState.setBounds(192, 196, 53, 14);
 		add(lblState);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(225, 193, 30, 20);
-		add(textField_6);
+		state = new JTextField();
+		state.setColumns(10);
+		state.setBounds(225, 193, 30, 20);
+		add(state);
 		
 		lblZip = new JLabel("Zip");
 		lblZip.setBounds(262, 196, 30, 14);
 		add(lblZip);
 		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(282, 193, 79, 20);
-		add(textField_7);
+		zip = new JTextField();
+		zip.setColumns(10);
+		zip.setBounds(282, 193, 79, 20);
+		add(zip);
 		
-		JButton btnNewButton = new JButton("Student");
-		btnNewButton.setBounds(10, 233, 116, 23);
-		add(btnNewButton);
+		JButton btnStudent = new JButton("Student");
+		btnStudent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Address address = new Address(streetField.getText(), Integer.parseInt(numberField.getText()), Integer.parseInt(zip.getText()), city.getText(), state.getText());
+				StudentRegister sr = new StudentRegister(fullnameField.getText(), DOBField.getText(), phoneField.getText(), address);
+				sr.setVisible(true); thisPanel.setVisible(false);
+				contentFrame.remove(thisPanel);
+				contentFrame.setContentPane(sr);
+				 
+			}
+		});
+		btnStudent.setBounds(10, 233, 116, 23);
+		add(btnStudent);
 		
 		JButton btnProfessor = new JButton("Professor");
 		btnProfessor.setBounds(324, 233, 116, 23);
@@ -115,6 +134,6 @@ public class UserRegister extends JPanel {
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 31));
 		lblNewLabel_1.setBounds(35, 11, 291, 46);
 		add(lblNewLabel_1);
-			
+		
 	}
 }

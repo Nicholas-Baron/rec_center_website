@@ -8,8 +8,11 @@ import java.awt.Font;
 import javax.swing.JTextField;
 
 import model.dataccess.ReservationBusiness;
+import model.dataccess.UserBusiness;
+import model.entities.Address;
 
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.awt.event.ActionEvent;
 
 public class StudentRegister extends JPanel {
@@ -17,11 +20,12 @@ public class StudentRegister extends JPanel {
 	private JTextField gradDateField;
 	private JTextField minorField;
 	private JTextField majorField;
+	private JTextField broncoId;
 
 	/**
 	 * Create the panel.
 	 */
-	public StudentRegister() {
+	public StudentRegister(String fullname, String DOB, String phone, Address address) {
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Student Register");
@@ -68,12 +72,24 @@ public class StudentRegister extends JPanel {
 		JButton registerButton = new JButton("Register");
 		registerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ReservationBusiness resBusiness = ReservationBusiness.getInstance();
-				//resBusiness.makeReservation("bob", "2021-12-12 09:30:00.000");
+				UserBusiness ub = UserBusiness.getInstance();
+				try {
+					ub.createCustomer(Integer.parseInt(broncoId.getText()), Date.valueOf(DOB), fullname, Integer.parseInt(phone), Date.valueOf(enterDateField.getText()), Date.valueOf(gradDateField.getText()), majorField.getText(), minorField.getText(), address);
+				} catch (Exception ex) {
+					
+				}
 			}
 		});
-		registerButton.setBounds(178, 225, 89, 23);
+		registerButton.setBounds(176, 266, 89, 23);
 		add(registerButton);
-
+		
+		JLabel lblNewLabel_1_1_1_2 = new JLabel("BroncoID");
+		lblNewLabel_1_1_1_2.setBounds(47, 228, 136, 14);
+		add(lblNewLabel_1_1_1_2);
+		
+		broncoId = new JTextField();
+		broncoId.setColumns(10);
+		broncoId.setBounds(212, 225, 179, 20);
+		add(broncoId);
 	}
 }
