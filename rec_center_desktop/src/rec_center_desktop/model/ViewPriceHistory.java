@@ -4,9 +4,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+
+import model.dataccess.ActivityBusiness;
+
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.awt.event.ActionEvent;
 
 public class ViewPriceHistory extends JPanel {
@@ -24,12 +30,10 @@ public class ViewPriceHistory extends JPanel {
 			lblNewLabel.setBounds(10, 11, 216, 54);
 			add(lblNewLabel);
 			
-			String[] columnNames = {"Price", "Date"};
-			
-			Object[][] data = {
-				    {"4.00", "2021-10-12"},
-				    {"3.00", "2020-12-12"},
-				};
+			String[] columnNames = { "Price", "Date" };
+
+			List<Object[]> priceHistory = ActivityBusiness.getInstance().getPriceHistory(activity)
+							.stream().map(p -> new Object[] {}).collect(Collectors.toList());
 			
 			JLabel lblNewLabel_1 = new JLabel("");
 			lblNewLabel_1.setBounds(158, 11, 194, 54);
@@ -38,8 +42,9 @@ public class ViewPriceHistory extends JPanel {
 			JScrollPane scrollPane = new JScrollPane();
 			scrollPane.setBounds(41, 226, 369, -148);
 			add(scrollPane);
-			
-			table = new JTable();
+
+			table = new JTable(Arrays.copyOf(priceHistory.toArray(), priceHistory.size(),
+							Object[][].class), columnNames);
 			table.setBounds(41, 226, 369, -148);
 			add(table);
 			

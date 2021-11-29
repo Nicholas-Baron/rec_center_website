@@ -3,6 +3,7 @@ package model.dataccess;
 import java.math.BigDecimal;
 import java.util.List;
 
+import model.entities.HistoricalPrice;
 import model.entities.RecreationalActivity;
 
 public class ActivityBusiness {
@@ -30,5 +31,12 @@ public class ActivityBusiness {
 		} catch (NumberFormatException e) {
 			throw new MessageException(e.getMessage() + "[" + price + "]");
 		}
+	}
+
+	public List<HistoricalPrice> getPriceHistory(String activity) {
+		if (activity.isEmpty())
+			throw new MessageException("activity name is empty");
+
+		return new ActivityDataAccess().getPriceHistory(activity);
 	}
 }
