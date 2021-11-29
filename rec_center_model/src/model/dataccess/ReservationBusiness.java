@@ -20,14 +20,16 @@ public class ReservationBusiness {
 		return instance;
 	}
 
-	public void makeReservation(String username, String datetime, List<String> activities)
+	public boolean makeReservation(String username, String datetime, List<String> activities)
 					throws MessageException {
+		boolean success = true;
 		if (username.equals("")) {
+			success = false;
 			throw new MessageException("Username not informed.");
 		} else if (datetime.equals("")) {
+			success = false;
 			throw new MessageException("Datetime not informed.");
 		}
-
 		ReservationDataAccess dataAccess = new ReservationDataAccess();
 
 		try {
@@ -36,8 +38,10 @@ public class ReservationBusiness {
 
 			dataAccess.createReservation(username, timestamp, activities);
 		} catch (IllegalArgumentException e) {
+			success = false;
 			throw new MessageException(e.getMessage() + " : " + datetime);
 		}
+		return success;
 	}
 
 	public List<Order> getReservations(String username) {

@@ -19,6 +19,7 @@ import javax.swing.text.MaskFormatter;
 import model.dataccess.ReservationBusiness;
 
 import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
 import javax.swing.border.EtchedBorder;
 import java.text.Format;
 
@@ -39,8 +40,10 @@ public class VisitRegistration extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public VisitRegistration(String currentUser) {
+	public VisitRegistration(JFrame contentFrame, String currentUser) {
 		setLayout(null);
+		
+		JPanel thisPanel = this;
 		
 		JLabel lblNewLabel = new JLabel("New Visit");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -158,11 +161,22 @@ public class VisitRegistration extends JPanel {
 				List<String> activities = new ArrayList<String>();
 				activities.add("wgihts");	
 				activities.add("togo");
+				boolean success = false;
 				try {
-					res.makeReservation(currentUser, dateTime, activities);
+					success = res.makeReservation(currentUser, dateTime, activities);		
 				} catch (Exception ex){
 					System.out.println(ex.getMessage());
 				}
+				//remove this
+				success = true;
+				if (success) {
+					VisitSuccess vs = new VisitSuccess(contentFrame, currentUser);
+					vs.setVisible(true);
+					thisPanel.setVisible(false);
+					contentFrame.remove(thisPanel);
+					contentFrame.setContentPane(vs);
+				}
+				
 			}
 		});
 		btnNewButton.setBounds(282, 266, 89, 23);
@@ -175,6 +189,19 @@ public class VisitRegistration extends JPanel {
 		JLabel lblNewLabel_5 = new JLabel("$00");
 		lblNewLabel_5.setBounds(200, 270, 46, 14);
 		add(lblNewLabel_5);
+		
+		JButton btnReturnToHome = new JButton("Return to Home");
+		btnReturnToHome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Home homePage = new Home(contentFrame, currentUser);
+				homePage.setVisible(true);
+				thisPanel.setVisible(false);
+				contentFrame.remove(thisPanel);
+				contentFrame.setContentPane(homePage);
+			}
+		});
+		btnReturnToHome.setBounds(231, 11, 177, 23);
+		add(btnReturnToHome);
 			
 	}
 }
