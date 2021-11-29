@@ -24,22 +24,14 @@ public class ActivitiesView extends JPanel {
 		
 		
 
-		String[] columnNames = {"First Name",
-                "Last Name",
-                "Sport",
-                "# of Years"};
+		String[] columnNames = {"Activity", "Price"};
 		
 		Object[][] data = {
-			    {"Kathy", "Smith",
-			     "Snowboarding", 5},
-			    {"John", "Doe",
-			     "Rowing", 3},
-			    {"Sue", "Black",
-			     "Knitting", (2)},
-			    {"Jane", "White",
-			     "Speed reading", (20)},
-			    {"Joe", "Brown",
-			     "Pool", (10)}
+			    {"Weightlifting", 5},
+			    {"Treadmill", 3},
+			    {"Pool", (2)},
+			    {"Hydro Massage", (20)},
+			    {"Yoga", (4)}
 			};
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(56, 259, 341, -197);
@@ -63,6 +55,16 @@ public class ActivitiesView extends JPanel {
 		add(btnNewButton);
 		
 		JButton btnChangePrice = new JButton("Change Price");
+		btnChangePrice.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String activity = "Weightlifting";
+				ChangePrice ca = new ChangePrice(contentFrame, userName, activity);
+				ca.setVisible(true);
+				thisPanel.setVisible(false);
+				contentFrame.remove(thisPanel);
+				contentFrame.setContentPane(ca);
+			}
+		});
 		btnChangePrice.setBounds(249, 259, 148, 23);
 		add(btnChangePrice);
 		
