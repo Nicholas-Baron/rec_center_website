@@ -46,6 +46,15 @@ public class Home extends JPanel {
 		add(btnNewOrder);
 		
 		JButton btnAcrivitiesList = new JButton("Activities List");
+		btnAcrivitiesList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ActivitiesView av = new ActivitiesView();
+				av.setVisible(true);
+				thisPanel.setVisible(false);
+				contentFrame.remove(thisPanel);
+				contentFrame.setContentPane(av);
+			}
+		});
 		btnAcrivitiesList.setBounds(63, 242, 135, 23);
 		add(btnAcrivitiesList);
 
