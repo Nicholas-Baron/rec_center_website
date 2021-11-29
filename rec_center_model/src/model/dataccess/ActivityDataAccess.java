@@ -1,7 +1,9 @@
 package model.dataccess;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -26,7 +28,12 @@ public class ActivityDataAccess {
 		Session session = ConnectionFactory.getInstance().getConnection();
 		var transaction = session.beginTransaction();
 
-		session.save(new RecreationalActivity(name, price));
+		var recreationalActivity = new RecreationalActivity(name, price);
+		recreationalActivity.changePrice(new Date(Calendar.getInstance().getTime().getTime()),
+						price);
+
+		session.save(recreationalActivity);
+		recreationalActivity.getPriceHistory().forEach(hp -> session.save(hp));
 
 		transaction.commit();
 	}

@@ -47,6 +47,7 @@ public class CreateActivity extends JPanel {
 					ActivityBusiness ab = ActivityBusiness.getInstance();
 					ab.makeActivity(nameField.getText(), priceField.getText());
 				} catch (Exception ex) {
+					System.out.println(ex.getMessage());
 					return;
 				}
 				SuccessActivitiesView sv = new SuccessActivitiesView(contentFrame, currentUser);
