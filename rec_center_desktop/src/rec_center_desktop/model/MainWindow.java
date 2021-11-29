@@ -1,4 +1,4 @@
-package rec_center_desktop.model;
+package src.rec_center_desktop.model;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import model.dataccess.LoginBusiness;
-import rec_center_desktop.model.Login;
+import src.rec_center_desktop.model.Login;
 
 public class MainWindow extends JFrame {
 

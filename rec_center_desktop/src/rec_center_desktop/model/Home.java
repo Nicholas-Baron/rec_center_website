@@ -1,4 +1,4 @@
-package rec_center_desktop.model;
+package src.rec_center_desktop.model;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;
