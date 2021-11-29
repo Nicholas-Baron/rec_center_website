@@ -4,11 +4,17 @@ import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import model.dataccess.ReservationBusiness;
+
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.awt.event.ActionEvent;
 
 public class ActivitiesView extends JPanel {
@@ -21,23 +27,18 @@ public class ActivitiesView extends JPanel {
 		setLayout(null);
 		
 		JPanel thisPanel = this;
-		
-		
 
-		String[] columnNames = {"Activity", "Price"};
+		String[] columnNames = { "Activity", "Price" };
+
+		List<Object[]> dataStrings = ReservationBusiness.getInstance().getActivities().stream()
+						.map(a -> new Object[] { a.getName(), a.getPrice().toPlainString() })
+						.collect(Collectors.toList());
 		
-		Object[][] data = {
-			    {"Weightlifting", 5},
-			    {"Treadmill", 3},
-			    {"Pool", (2)},
-			    {"Hydro Massage", (20)},
-			    {"Yoga", (4)}
-			};
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(56, 259, 341, -197);
 		add(scrollPane);
 		
-		table = new JTable(data, columnNames);
+		table = new JTable(Arrays.copyOf(dataStrings.toArray(), dataStrings.size(), Object[][].class), columnNames);
 		add(table);
 		table.setBounds(56, 89, 322, 80);
 		
