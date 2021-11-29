@@ -34,9 +34,7 @@ public class ReservationBusiness {
 			// format the datetime string
 			Timestamp timestamp = Timestamp.valueOf(datetime.replace('T', ' ') + ":00");
 
-			if (!dataAccess.createReservation(username, timestamp, activities)) {
-				throw new MessageException("Incorrect credentials.");
-			}
+			dataAccess.createReservation(username, timestamp, activities);
 		} catch (IllegalArgumentException e) {
 			throw new MessageException(e.getMessage() + " : " + datetime);
 		}

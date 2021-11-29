@@ -33,20 +33,26 @@ public class CreateReservationControl extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 					throws ServletException, IOException {
 
-		String userName = request.getParameter("username");
+		String userName = request.getSession().getAttribute("username").toString();
 		String datetime = request.getParameter("datetime");
 		String[] activities = request.getParameterValues("activities");
+		
+		System.out.println(userName);
+
+		String redirect = "";
 
 		try {
 			ReservationBusiness.getInstance().makeReservation(userName, datetime, Arrays
 							.stream(activities).map(s -> s.trim()).collect(Collectors.toList()));
 
 			request.setAttribute("username", request.getParameter("username"));
+			redirect = "/view/ThankYou.jsp";
 		} catch (MessageException e) {
 			request.setAttribute("error", e.getMessage());
+			redirect = "/view/WelcomeView.jsp";
 		}
 
-		RequestDispatcher rd = request.getRequestDispatcher("/view/WelcomeView.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher(redirect);
 		rd.forward(request, response);
 	}
 }

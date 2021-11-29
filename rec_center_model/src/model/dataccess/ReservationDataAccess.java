@@ -33,7 +33,7 @@ public class ReservationDataAccess {
 		return query.uniqueResult() != null;
 	}
 
-	public boolean createReservation(String username, Timestamp timestamp,
+	public void createReservation(String username, Timestamp timestamp,
 					List<String> activityNames) {
 
 		Session session = ConnectionFactory.getInstance().getConnection();
@@ -59,7 +59,6 @@ public class ReservationDataAccess {
 		session.save(order);
 
 		transaction.commit();
-		return false;
 	}
 
 	public List<Order> listReservations(String username) {
