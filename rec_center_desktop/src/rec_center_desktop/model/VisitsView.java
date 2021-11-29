@@ -6,15 +6,18 @@ import java.awt.Font;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VisitsView extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public VisitsView() {
+	public VisitsView(JFrame contentFrame, String currentUser) {
 		setLayout(null);
-		
+		JPanel thisPanel = this;
 		JLabel lblNewLabel = new JLabel("My Visits");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		lblNewLabel.setBounds(35, 11, 373, 43);
@@ -42,8 +45,17 @@ public class VisitsView extends JPanel {
 		lblNewLabel_1_1_1_1.setBounds(93, 85, 183, 14);
 		panel.add(lblNewLabel_1_1_1_1);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(175, 256, 89, 23);
+		JButton btnNewButton = new JButton("Return Home");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Home homePage = new Home(contentFrame, currentUser);
+				homePage.setVisible(true);
+				thisPanel.setVisible(false);
+				contentFrame.remove(thisPanel);
+				contentFrame.setContentPane(homePage);
+			}
+		});
+		btnNewButton.setBounds(93, 256, 259, 23);
 		add(btnNewButton);
 		
 	}
