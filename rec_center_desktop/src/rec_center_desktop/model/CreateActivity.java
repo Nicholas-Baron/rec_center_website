@@ -2,6 +2,9 @@ package src.rec_center_desktop.model;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import model.dataccess.ActivityBusiness;
+
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -40,6 +43,12 @@ public class CreateActivity extends JPanel {
 		JButton btnNewButton = new JButton("Submit");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					ActivityBusiness ab = ActivityBusiness.getInstance();
+					ab.makeActivity(nameField.getText(), priceField.getText());
+				} catch (Exception ex) {
+					return;
+				}
 				SuccessActivitiesView sv = new SuccessActivitiesView(contentFrame, currentUser);
 				sv.setVisible(true);
 				thisPanel.setVisible(false);
