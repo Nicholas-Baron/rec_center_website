@@ -2,6 +2,7 @@ package control;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,7 +22,8 @@ public class CreateReservationControl extends HttpServlet {
 		var activityNames = ReservationBusiness.getInstance().getActivites().stream()
 						.map(a -> a.getName()).toArray();
 
-		req.setAttribute("activities", Arrays.toString(activityNames).replace("[", "").replace("]", ""));
+		req.setAttribute("activities",
+						Arrays.toString(activityNames).replace("[", "").replace("]", "").trim());
 
 		RequestDispatcher rd = req.getRequestDispatcher("/view/CreateReservation.jsp");
 		rd.forward(req, resp);
@@ -31,26 +33,20 @@ public class CreateReservationControl extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 					throws ServletException, IOException {
 
-		String address = "";
-
 		String userName = request.getParameter("username");
 		String datetime = request.getParameter("datetime");
+		String[] activities = request.getParameterValues("activities");
 
 		try {
-
-			ReservationBusiness.getInstance().makeReservation(userName, datetime);
+			ReservationBusiness.getInstance().makeReservation(userName, datetime, Arrays
+							.stream(activities).map(s -> s.trim()).collect(Collectors.toList()));
 
 			request.setAttribute("username", request.getParameter("username"));
-			address = "/view/WelcomeView.jsp";
-
 		} catch (MessageException e) {
-			if (e.getMessage().equals("Username not informed.")) {
-				request.setAttribute("ErrorLogin", "Username not informed.");
-				address = "/view/LoginView.jsp";
-			}
+			request.setAttribute("error", e.getMessage());
 		}
 
-		RequestDispatcher rd = request.getRequestDispatcher(address);
+		RequestDispatcher rd = request.getRequestDispatcher("/view/WelcomeView.jsp");
 		rd.forward(request, response);
 	}
 }

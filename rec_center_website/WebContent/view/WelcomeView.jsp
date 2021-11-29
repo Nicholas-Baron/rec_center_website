@@ -27,7 +27,9 @@
 			value="<%=session.getAttribute("username")%>" /> <input
 			type="submit" value="Current Reservations" />
 	</form>
-
+	<h1 style="color: red;">
+		<c:out value="${requestScope.error}" />
+	</h1>
 </body>
 
 </html>
