@@ -123,6 +123,15 @@ public class UserRegister extends JPanel {
 		add(btnStudent);
 		
 		JButton btnProfessor = new JButton("Professor");
+		btnProfessor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Address address = new Address(streetField.getText(), Integer.parseInt(numberField.getText()), Integer.parseInt(zip.getText()), city.getText(), state.getText());
+				ProfessorRegister sr = new ProfessorRegister(fullnameField.getText(), DOBField.getText(), phoneField.getText(), address);
+				sr.setVisible(true); thisPanel.setVisible(false);
+				contentFrame.remove(thisPanel);
+				contentFrame.setContentPane(sr);
+			}
+		});
 		btnProfessor.setBounds(324, 233, 116, 23);
 		add(btnProfessor);
 		

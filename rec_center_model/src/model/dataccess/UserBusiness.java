@@ -13,25 +13,40 @@ import model.entities.RecreationalActivity;
 public class UserBusiness {
 	private UserBusiness() {
 	}
-	
+
 	private static UserBusiness instance;
-	
+
 	public static UserBusiness getInstance() {
 		if (instance == null) {
 			instance = new UserBusiness();
-		} 
+		}
 		return instance;
 	}
-	
-	public void createCustomer(int broncoID, Date date, String fullname, int phone, Date date2, Date date3, String major, String minor, Address address) {
+
+	public void createCustomer(int broncoID, Date date, String fullname, int phone, Date date2,
+					Date date3, String major, String minor, Address address) {
 		// handle exceptions later
-		
+
 		UserDataAccess dataAccess = new UserDataAccess();
-		
+
 		try {
-			dataAccess.createStudent(broncoID, date, fullname, phone, date2, date3, major, minor, address);
+			dataAccess.createStudent(broncoID, date, fullname, phone, date2, date3, major, minor,
+							address);
 		} catch (Exception ex) {
-			
+
 		}
+	}
+
+	public void createCustomer(int broncoID, Date date, String fullname, int phone,
+					String department, String office, String research, Address address) {
+		UserDataAccess dataAccess = new UserDataAccess();
+
+		try {
+			dataAccess.createProfessor(broncoID, date, fullname, phone, department, office,
+							research, address);
+		} catch (Exception ex) {
+
+		}
+
 	}
 }
