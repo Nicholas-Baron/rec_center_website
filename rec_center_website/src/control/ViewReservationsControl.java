@@ -32,7 +32,7 @@ public class ViewReservationsControl extends HttpServlet {
 											o.getStatus().toString() };
 						}).toArray());
 
-		RequestDispatcher rd = request.getRequestDispatcher("/view/ViewRegistrations.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/view/ViewReservations.jsp");
 		rd.forward(request, response);
 	}
 }
