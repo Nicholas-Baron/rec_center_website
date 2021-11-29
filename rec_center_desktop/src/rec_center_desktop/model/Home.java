@@ -22,6 +22,11 @@ public class Home extends JPanel {
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				VisitsView vv = new VisitsView(contentFrame, currentUser);
+				vv.setVisible(true);
+				thisPanel.setVisible(false);
+				contentFrame.remove(thisPanel);
+				contentFrame.setContentPane(vv);
 			}
 		});
 		btnNewButton.setBounds(63, 206, 135, 23);
