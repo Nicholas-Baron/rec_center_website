@@ -1,9 +1,12 @@
 package model.dataccess;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import model.entities.Order;
+import model.entities.RecreationalActivity;
 
 public class ReservationBusiness {
 	private ReservationBusiness() {
@@ -17,18 +20,25 @@ public class ReservationBusiness {
 		return instance;
 	}
 
-	public void makeReservation(String username, String datetime) throws MessageException {
+	public void makeReservation(String username, String datetime, List<String> activities)
+					throws MessageException {
 		if (username.equals("")) {
 			throw new MessageException("Username not informed.");
+		} else if (datetime.equals("")) {
+			throw new MessageException("Datetime not informed.");
 		}
 
 		ReservationDataAccess dataAccess = new ReservationDataAccess();
 
-		// format the datetime string
-		Timestamp timestamp = Timestamp.valueOf(datetime.replace('T', ' ') + ":00");
+		try {
+			// format the datetime string
+			Timestamp timestamp = Timestamp.valueOf(datetime.replace('T', ' ') + ":00");
 
-		if (!dataAccess.createReservation(username, timestamp)) {
-			throw new MessageException("Incorrect credentials.");
+			if (!dataAccess.createReservation(username, timestamp, activities)) {
+				throw new MessageException("Incorrect credentials.");
+			}
+		} catch (IllegalArgumentException e) {
+			throw new MessageException(e.getMessage() + " : " + datetime);
 		}
 	}
 
@@ -40,5 +50,9 @@ public class ReservationBusiness {
 		ReservationDataAccess dataAccess = new ReservationDataAccess();
 
 		return dataAccess.listReservations(username);
+	}
+
+	public List<RecreationalActivity> getActivites() {
+		return new ReservationDataAccess().listActivities();
 	}
 }

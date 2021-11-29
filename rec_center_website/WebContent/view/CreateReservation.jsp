@@ -12,7 +12,7 @@
 
 	<h1>Create Reservation</h1>
 
-	<form action="${pageContext.request.contextPath}/create_registration"
+	<form action="${pageContext.request.contextPath}/create_reservation"
 		method="post">
 		<input type="hidden" name="username"
 			value="<%=session.getAttribute("username")%>" />
@@ -20,10 +20,19 @@
 			border="0">
 			<tr>
 				<td>Choose a date and time for the reservation:</td>
-				<td><input type="datetime-local" name="datetime" /></td>
+				<td><input type="datetime-local" name="datetime" required /></td>
 			</tr>
 			<tr>
-				<td><input type="submit" name="submit" value="Confirm" /></td>
+				<td>Choose the activities to reserve:</td>
+				<td><select multiple name="activities">
+						<c:forEach var="activity" items="${requestScope.activities} ">
+							<option value="${activity}">${activity}</option>
+						</c:forEach>
+				</select></td>
+			</tr>
+			<tr>
+				<td><input type="submit" name="submit" value="Confirm"
+					onclick="window.location = 'view/WelcomeView.jsp'" /></td>
 				<td align="right">
 					<button type="button" class="btn btn-primary"
 						onclick="window.history.back();">Cancel</button>

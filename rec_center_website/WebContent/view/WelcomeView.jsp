@@ -15,15 +15,21 @@
 		<c:out value="Welcome ${requestScope.username}!" />
 	</h1>
 
-	<input type="button" value="New Registration"
-		onclick="window.location='view/CreateRegistration.jsp'" />
-	<form action="${pageContext.request.contextPath}/view_registrations"
+	<form action="${pageContext.request.contextPath}/create_reservation"
+		method="get">
+		<input type="hidden" name="username"
+			value="<%=session.getAttribute("username")%>" /> <input
+			type="submit" value="Create Reservation" />
+	</form>
+	<form action="${pageContext.request.contextPath}/view_reservations"
 		method="get">
 		<input type="hidden" name="username"
 			value="<%=session.getAttribute("username")%>" /> <input
 			type="submit" value="Current Reservations" />
 	</form>
-
+	<h1 style="color: red;">
+		<c:out value="${requestScope.error}" />
+	</h1>
 </body>
 
 </html>

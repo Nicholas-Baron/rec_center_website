@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.dataccess.ReservationBusiness;
 
 @SuppressWarnings("serial")
-public class ViewRegistrationsControl extends HttpServlet {
+public class ViewReservationsControl extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 					throws ServletException, IOException {
 

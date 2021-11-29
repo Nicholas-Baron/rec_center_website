@@ -12,6 +12,7 @@ import org.hibernate.query.Query;
 import model.entities.Customer;
 import model.entities.Order;
 import model.entities.OrderStatus;
+import model.entities.RecreationalActivity;
 
 public class ReservationDataAccess {
 
@@ -32,7 +33,8 @@ public class ReservationDataAccess {
 		return query.uniqueResult() != null;
 	}
 
-	public boolean createReservation(String username, Timestamp timestamp) {
+	public boolean createReservation(String username, Timestamp timestamp,
+					List<String> activityNames) {
 
 		Session session = ConnectionFactory.getInstance().getConnection();
 		Transaction transaction = session.beginTransaction();
@@ -41,8 +43,18 @@ public class ReservationDataAccess {
 						Customer.class);
 		query.setParameter("name", username);
 
-		Order order = new Order(query.uniqueResult(), new ArrayList<>(), timestamp,
-						new BigDecimal(0), OrderStatus.OnlinePending);
+		var activities = new ArrayList<RecreationalActivity>();
+
+		if (!activityNames.isEmpty()) {
+			Query<RecreationalActivity> activitiesQuery = session.createQuery(
+							"select r from RecreationalActivity r where r.name in :options",
+							RecreationalActivity.class);
+			activitiesQuery.setParameter("options", activityNames);
+			activities.addAll(activitiesQuery.getResultList());
+		}
+
+		Order order = new Order(query.uniqueResult(), activities, timestamp, new BigDecimal(0),
+						OrderStatus.OnlinePending);
 
 		session.save(order);
 
@@ -62,6 +74,16 @@ public class ReservationDataAccess {
 		Query<Order> query = session.createQuery("select o from Order o where o.customer=:customer",
 						Order.class);
 		query.setParameter("customer", c);
+
+		return query.getResultList();
+	}
+
+	public List<RecreationalActivity> listActivities() {
+
+		Session session = ConnectionFactory.getInstance().getConnection();
+
+		Query<RecreationalActivity> query = session.createQuery(
+						"select r from RecreationalActivity r", RecreationalActivity.class);
 
 		return query.getResultList();
 	}
