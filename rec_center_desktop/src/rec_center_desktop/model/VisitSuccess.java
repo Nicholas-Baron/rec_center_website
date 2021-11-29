@@ -35,7 +35,6 @@ public class VisitSuccess extends JPanel {
 		});
 		btnNewButton.setBounds(105, 235, 256, 23);
 		add(btnNewButton);
-
 	}
 
 }
