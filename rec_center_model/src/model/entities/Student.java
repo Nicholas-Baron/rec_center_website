@@ -24,15 +24,13 @@ public class Student extends Customer {
 
 	public Student(int broncoID, Date DOB, String fullname, int phone, Date enterDate,
 					Date gradDate, String major, String minor, Address address) {
+
+		super(broncoID, DOB, fullname, phone, address);
+
 		this.enterDate = enterDate;
 		this.gradDate = gradDate;
-		this.address = address;
 		this.major = major;
 		this.minor = minor;
-		this.dateOfBirth = DOB;
-		this.setPhone(phone);
-		this.setName(fullname);
-		this.setBroncoId(broncoID);
 	}
 
 	public Date getEnterDate() {

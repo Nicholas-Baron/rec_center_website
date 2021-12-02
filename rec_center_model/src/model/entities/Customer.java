@@ -59,6 +59,13 @@ public class Customer {
 	public Customer() {
 	}
 
+	protected Customer(int broncoID, Date dob, String fullname, int phone, Address address) {
+		this.name = fullname;
+		this.address = address;
+		this.broncoID = broncoID;
+		this.dateOfBirth = dob;
+	}
+
 	public String getName() {
 		return name;
 	}

@@ -20,11 +20,8 @@ public class Professor extends Customer {
 
 	public Professor(int broncoID, Date DOB, String fullname, int phone, String department,
 					String office, String research, Address address) {
-		this.address = address;
-		this.dateOfBirth = DOB;
-		this.setPhone(phone);
-		this.setName(fullname);
-		this.setBroncoId(broncoID);
+
+		super(broncoID, DOB, fullname, phone, address);
 
 		this.department = department;
 		this.office = office;

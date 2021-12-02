@@ -28,6 +28,21 @@ public class ProfessorStudent extends Customer {
 	public ProfessorStudent() {
 	}
 
+	public ProfessorStudent(int broncoID, Date dob, String fullname, int phone, Date enterDate,
+					Date gradDate, String major, String minor, String department, String office,
+					String research, Address address) {
+
+		super(broncoID, dob, fullname, phone, address);
+
+		this.research = research;
+		this.office = office;
+		this.department = department;
+		this.minor = minor;
+		this.major = major;
+		this.gradDate = gradDate;
+		this.enterDate = enterDate;
+	}
+
 	public Date getEnterDate() {
 		return enterDate;
 	}
