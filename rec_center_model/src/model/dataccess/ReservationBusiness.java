@@ -1,11 +1,9 @@
 package model.dataccess;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import model.entities.CustomerType;
 import model.entities.Order;
 import model.entities.OrderStatus;
@@ -70,5 +68,12 @@ public class ReservationBusiness {
 		}
 
 		new ReservationDataAccess().createDiscount(type, percent);
+	}
+
+	public List<Order> getOrdersBetween(Date start, Date end) {
+		if (start.compareTo(end) >= 0)
+			throw new MessageException(end + " is before " + start);
+
+		return new ReservationDataAccess().getOrdersBetween(start, end);
 	}
 }

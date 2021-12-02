@@ -1,6 +1,7 @@
 package model.dataccess;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -132,5 +133,13 @@ public class ReservationDataAccess {
 		session.saveOrUpdate(discount);
 
 		transaction.commit();
+	}
+
+	public List<Order> getOrdersBetween(Date start, Date end) {
+		Session session = ConnectionFactory.getInstance().getConnection();
+
+		return session.createQuery("select o from Order o where o.datetime between :start and :end",
+						Order.class).setParameter("start", start).setParameter("end", end)
+						.getResultList();
 	}
 }

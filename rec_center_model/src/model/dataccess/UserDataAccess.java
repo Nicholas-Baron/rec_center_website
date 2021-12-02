@@ -1,22 +1,11 @@
 package model.dataccess;
 
-import java.math.BigDecimal;
 import java.sql.Date;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
-
 import model.entities.Address;
 import model.entities.Customer;
-import model.entities.Order;
-import model.entities.OrderStatus;
 import model.entities.Professor;
-import model.entities.RecreationalActivity;
 import model.entities.Student;
 
 public class UserDataAccess {
