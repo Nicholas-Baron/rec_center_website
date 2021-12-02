@@ -43,4 +43,10 @@ public class UserDataAccess {
 		transaction.commit();
 
 	}
+
+	public Customer getByName(String name) {
+		Session session = ConnectionFactory.getInstance().getConnection();
+		return session.createQuery("select c from Customer c where c.name = :name", Customer.class)
+						.setParameter("name", name).uniqueResult();
+	}
 }

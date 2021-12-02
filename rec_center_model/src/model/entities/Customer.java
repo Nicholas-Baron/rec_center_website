@@ -8,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -46,6 +48,10 @@ public class Customer {
 	@OneToMany(mappedBy = "customer", cascade = { CascadeType.PERSIST })
 	private List<Order> orders;
 
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false, name = "customer_type", updatable = false, insertable = false)
+	private CustomerType type;
+
 	public Integer getID() {
 		return this.customerID;
 	}
@@ -76,7 +82,11 @@ public class Customer {
 	public List<Order> getOrders() {
 		return orders;
 	}
-	
+
+	public CustomerType getType() {
+		return type;
+	}
+
 	public void setBroncoId(int broncoId) {
 		this.broncoID = broncoId;
 	}

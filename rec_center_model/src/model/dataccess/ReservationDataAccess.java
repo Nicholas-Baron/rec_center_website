@@ -45,18 +45,31 @@ public class ReservationDataAccess {
 						Customer.class);
 		query.setParameter("name", username);
 
-		var activities = new ArrayList<RecreationalActivity>();
+		List<RecreationalActivity> activities = new ArrayList<>();
+		var price = new BigDecimal(0);
 
 		if (!activityNames.isEmpty()) {
 			Query<RecreationalActivity> activitiesQuery = session.createQuery(
 							"select r from RecreationalActivity r where r.name in :options",
 							RecreationalActivity.class);
 			activitiesQuery.setParameter("options", activityNames);
-			activities.addAll(activitiesQuery.getResultList());
+
+			activities = activitiesQuery.getResultList();
+			price = activities.stream().map(a -> a.getPrice()).reduce(new BigDecimal(0),
+							(lhs, rhs) -> lhs.add(rhs));
 		}
 
-		Order order = new Order(query.uniqueResult(), activities, timestamp, new BigDecimal(0),
-						status);
+		var priceFraction = BigDecimal.ONE;
+		if (price.compareTo(BigDecimal.ZERO) > 0) {
+			var customerType = new UserDataAccess().getByName(username).getType();
+			var discount = new ReservationDataAccess().getDiscount(customerType);
+			if (discount != null)
+				priceFraction = BigDecimal.ONE
+								.subtract(discount.getPercent().divide(new BigDecimal(100)));
+		}
+
+		Order order = new Order(query.uniqueResult(), activities, timestamp,
+						price.multiply(priceFraction), status);
 
 		session.save(order);
 
@@ -93,24 +106,24 @@ public class ReservationDataAccess {
 		Session session = ConnectionFactory.getInstance().getConnection();
 
 		Query<Discount> query = session
-						.createQuery("select d from Discount d where d.customer_type=:type",
+						.createQuery("select d from Discount d where d.customerType=:type",
 										Discount.class)
 						.setParameter("type", type);
 
-		return query.getSingleResult();
+		var results = query.getResultList();
+		if (results.isEmpty())
+			return null;
+		return results.remove(0);
 	}
 
 	public void createDiscount(CustomerType type, BigDecimal percent) {
+
+		var discount = getDiscount(type);
+
 		Session session = ConnectionFactory.getInstance().getConnection();
 
 		var transaction = session.beginTransaction();
 
-		Query<Discount> query = session
-						.createQuery("select d from Discount d where d.customer_type=:type",
-										Discount.class)
-						.setParameter("type", type);
-
-		var discount = query.getSingleResult();
 		if (discount == null)
 			discount = new Discount(type, percent);
 		else
