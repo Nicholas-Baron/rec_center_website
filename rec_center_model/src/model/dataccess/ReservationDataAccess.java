@@ -10,6 +10,8 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import model.entities.Customer;
+import model.entities.CustomerType;
+import model.entities.Discount;
 import model.entities.Order;
 import model.entities.OrderStatus;
 import model.entities.RecreationalActivity;
@@ -77,4 +79,45 @@ public class ReservationDataAccess {
 		return query.getResultList();
 	}
 
+	public List<RecreationalActivity> listActivities() {
+
+		Session session = ConnectionFactory.getInstance().getConnection();
+
+		Query<RecreationalActivity> query = session.createQuery(
+						"select r from RecreationalActivity r", RecreationalActivity.class);
+
+		return query.getResultList();
+	}
+
+	public Discount getDiscount(CustomerType type) {
+		Session session = ConnectionFactory.getInstance().getConnection();
+
+		Query<Discount> query = session
+						.createQuery("select d from Discount d where d.customer_type=:type",
+										Discount.class)
+						.setParameter("type", type);
+
+		return query.getSingleResult();
+	}
+
+	public void createDiscount(CustomerType type, BigDecimal percent) {
+		Session session = ConnectionFactory.getInstance().getConnection();
+
+		var transaction = session.beginTransaction();
+
+		Query<Discount> query = session
+						.createQuery("select d from Discount d where d.customer_type=:type",
+										Discount.class)
+						.setParameter("type", type);
+
+		var discount = query.getSingleResult();
+		if (discount == null)
+			discount = new Discount(type, percent);
+		else
+			discount.setPercent(percent);
+
+		session.saveOrUpdate(discount);
+
+		transaction.commit();
+	}
 }
