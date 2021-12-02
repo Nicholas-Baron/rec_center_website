@@ -34,9 +34,6 @@ public class VisitsView extends JPanel {
 							.map(a -> new Object[] { a.getDatetime(), a.getStatus()})
 							.collect(Collectors.toList());
 			
-			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setBounds(56, 259, 341, -197);
-			add(scrollPane);
 			
 			table = new JTable(Arrays.copyOf(dataStrings.toArray(), dataStrings.size(), Object[][].class), columnNames);
 			add(table);
@@ -52,8 +49,12 @@ public class VisitsView extends JPanel {
 					contentFrame.setContentPane(homePage);
 				}
 			});
-			btnReturnHome.setBounds(145, 238, 148, 23);
+			btnReturnHome.setBounds(145, 259, 148, 23);
 			add(btnReturnHome);
+			
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setBounds(56, 259, 341, -197);
+			add(scrollPane);
 			
 			JLabel lblNewLabel = new JLabel("Viewing Visits for: ");
 			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -64,6 +65,23 @@ public class VisitsView extends JPanel {
 			nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			nameLabel.setBounds(145, 11, 263, 48);
 			add(nameLabel);
+			
+			JButton btnViewReceipts = new JButton("View Receipts");
+			btnViewReceipts.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					ViewReceipt vr = new ViewReceipt(contentFrame, userName);
+					vr.setVisible(true);
+					thisPanel.setVisible(false);
+					contentFrame.remove(thisPanel);
+					contentFrame.setContentPane(vr);
+				}
+			});
+			btnViewReceipts.setBounds(56, 221, 148, 23);
+			add(btnViewReceipts);
+			
+			JButton btnViewAnalytics = new JButton("View Analytics");
+			btnViewAnalytics.setBounds(230, 221, 148, 23);
+			add(btnViewAnalytics);
 		}
 		
 	}

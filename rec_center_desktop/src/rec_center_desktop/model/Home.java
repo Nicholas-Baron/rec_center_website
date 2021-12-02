@@ -62,6 +62,19 @@ public class Home extends JPanel {
 		});
 		btnAcrivitiesList.setBounds(63, 242, 135, 23);
 		add(btnAcrivitiesList);
+		
+		JButton btnDignOut = new JButton("Sign Out");
+		btnDignOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Login login = new Login(contentFrame);
+				login.setVisible(true);
+				thisPanel.setVisible(false);
+				contentFrame.remove(thisPanel);
+				contentFrame.setContentPane(login);
+			}
+		});
+		btnDignOut.setBounds(250, 242, 135, 23);
+		add(btnDignOut);
 
 	}
 }

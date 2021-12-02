@@ -1,158 +1,106 @@
 package src.rec_center_desktop.model;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import java.awt.Font;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 import java.util.Vector;
+import java.util.stream.Collectors;
 
-import javax.swing.JTextField;
+import javax.swing.*;
+import javax.swing.DefaultListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.DateFormatter;
-import javax.swing.text.MaskFormatter;
 
-import model.dataccess.MessageException;
+import model.dataccess.ActivityBusiness;
 import model.dataccess.ReservationBusiness;
 import model.entities.OrderStatus;
 
-import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
-import javax.swing.border.EtchedBorder;
-import java.text.Format;
-
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
-import javax.swing.JList;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
+/** @see http://stackoverflow.com/questions/4526779 */
 public class VisitRegistration extends JPanel {
-	private JFormattedTextField dateField;
-	private JFormattedTextField timeField;
 
-	/**
-	 * Create the panel.
-	 */
-	public VisitRegistration(JFrame contentFrame, String currentUser) {
-		setLayout(null);
-		
-		JPanel thisPanel = this;
-		
-		JLabel lblNewLabel = new JLabel("New Visit");
+    private static final int CHECK_COL = 0;
+	
+    private static final String[] COLUMNS = {"Checked", "Activity", "Price"};
+    private DataModel dataModel;
+    private DefaultListSelectionModel selectionModel; 
+    
+    private JFormattedTextField dateField;
+	private JFormattedTextField timeField;
+	
+	private JPanel thisPanel = this;
+
+    public VisitRegistration(JFrame contentFrame, String currentUser) {
+        
+        List<Object[]> dataStrings = ActivityBusiness.getInstance().getActivities().stream()
+				.map(a -> new Object[] { Boolean.FALSE, a.getName(), a.getPrice().toPlainString() })
+				.collect(Collectors.toList());
+        
+        dataModel = new DataModel(Arrays.copyOf(dataStrings.toArray(), dataStrings.size(), Object[][].class), COLUMNS);
+
+        JTable table = new JTable(dataModel);
+    	DefaultListSelectionModel selectionModel;
+        setLayout(null);
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(10, 143, 430, 119);
+        this.add(scrollPane);
+        this.add(new ControlPanel(), BorderLayout.SOUTH);
+        table.setPreferredScrollableViewportSize(new Dimension(250, 175));
+        selectionModel = (DefaultListSelectionModel) table.getSelectionModel();
+        
+        JLabel lblNewLabel = new JLabel("New Visit");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblNewLabel.setBounds(35, 11, 256, 46);
+		lblNewLabel.setBounds(10, 11, 252, 29);
 		add(lblNewLabel);
-		
-		JPanel panel = new JPanel();
-		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panel.setBounds(81, 52, 290, 92);
-		add(panel);
-		panel.setLayout(null);
-		
 		JLabel dateLabel = new JLabel("Date: ");
-		dateLabel.setBounds(8, 8, 41, 14);
-		panel.add(dateLabel);
+		dateLabel.setBounds(93, 54, 41, 14);
+		this.add(dateLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Time:");
-		lblNewLabel_1.setBounds(8, 33, 41, 14);
-		panel.add(lblNewLabel_1);
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		lblNewLabel_1.setBounds(93, 79, 41, 14);
+		this.add(lblNewLabel_1);
+		DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
 		DateFormatter df = new DateFormatter(format);
 		dateField = new JFormattedTextField(df);
-		dateField.setBounds(71, 5, 209, 20);
+		dateField.setBounds(156, 51, 209, 20);
 		Calendar cal = Calendar.getInstance();
-		cal.clear();
-		cal.set(2021, Calendar.JANUARY, 01);
+		cal.set(2021, 01, 01);
 		dateField.setValue(cal.getTime());
 		
-		panel.add(dateField);
+		this.add(dateField);
 
 		DateFormat tf = new SimpleDateFormat("HH:mm");
 		tf.setTimeZone(TimeZone.getTimeZone("GMT"));
 		timeField = new JFormattedTextField(tf);
 		timeField.setText("12:00");
-		timeField.setBounds(71, 30, 209, 20);
-		panel.add(timeField);
+		timeField.setBounds(156, 76, 209, 20);
+		this.add(timeField);
 		
 		JLabel customerLabel = new JLabel("Customer:");
-		customerLabel.setBounds(8, 65, 66, 14);
-		panel.add(customerLabel);
+		customerLabel.setBounds(93, 111, 66, 14);
+		this.add(customerLabel);
 		
 		Vector<String> comboBoxItems = new Vector<String>();
 		comboBoxItems.add(currentUser);
 		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(comboBoxItems);
 		JComboBox<String> comboBox = new JComboBox<String>(model);
-		comboBox.setBounds(71, 61, 209, 22);
-		panel.add(comboBox);
+		comboBox.setBounds(156, 107, 209, 22);
+		this.add(comboBox);
 		
-		JLabel lblAddActivities = new JLabel("Add Activities");
-		lblAddActivities.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblAddActivities.setBounds(35, 145, 256, 46);
-		add(lblAddActivities);
+
+		JLabel lblNewLabel_4 = new JLabel("Total Price After Discount:");
+		lblNewLabel_4.setBounds(35, 270, 171, 14);
+		add(lblNewLabel_4);
 		
-		JList list = new JList();
-		list.setBounds(378, 202, -296, 61);
-		add(list);
-		
-		JLabel lblNewLabel_2 = new JLabel("Treadmill");
-		lblNewLabel_2.setBounds(117, 214, 46, 14);
-		add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_2_1 = new JLabel("Pool");
-		lblNewLabel_2_1.setBounds(117, 189, 46, 14);
-		add(lblNewLabel_2_1);
-		
-		JLabel lblNewLabel_2_2 = new JLabel("Weightlifting");
-		lblNewLabel_2_2.setBounds(117, 239, 92, 14);
-		add(lblNewLabel_2_2);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_1.setBounds(85, 189, 10, 10);
-		add(panel_1);
-		
-		JPanel panel_1_1 = new JPanel();
-		panel_1_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_1_1.setBounds(85, 210, 10, 10);
-		add(panel_1_1);
-		
-		JPanel panel_1_1_1 = new JPanel();
-		panel_1_1_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_1_1_1.setBounds(85, 236, 10, 10);
-		add(panel_1_1_1);
-		
-		JLabel lblNewLabel_2_1_1 = new JLabel("$5");
-		lblNewLabel_2_1_1.setBounds(200, 185, 46, 14);
-		add(lblNewLabel_2_1_1);
-		
-		JLabel lblNewLabel_2_1_1_1 = new JLabel("$2");
-		lblNewLabel_2_1_1_1.setBounds(200, 210, 46, 14);
-		add(lblNewLabel_2_1_1_1);
-		
-		JLabel lblNewLabel_2_1_1_1_1 = new JLabel("$3");
-		lblNewLabel_2_1_1_1_1.setBounds(200, 235, 46, 14);
-		add(lblNewLabel_2_1_1_1_1);
-		
-		JLabel lblNewLabel_3 = new JLabel("See Price History");
-		lblNewLabel_3.setBounds(285, 188, 86, 14);
-		add(lblNewLabel_3);
-		
-		JLabel lblNewLabel_3_1 = new JLabel("See Price History");
-		lblNewLabel_3_1.setBounds(285, 210, 86, 14);
-		add(lblNewLabel_3_1);
-		
-		JLabel lblNewLabel_3_2 = new JLabel("See Price History");
-		lblNewLabel_3_2.setBounds(285, 235, 86, 14);
-		add(lblNewLabel_3_2);
+		JLabel lblNewLabel_5 = new JLabel("$00");
+		lblNewLabel_5.setBounds(216, 270, 46, 14);
+		add(lblNewLabel_5);
 		
 		JButton btnNewButton = new JButton("Submit");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -162,48 +110,89 @@ public class VisitRegistration extends JPanel {
 				String time = timeField.getText().trim();
 				String dateTime = date + "T" + time;
 				List<String> activities = new ArrayList<String>();
-				activities.add("wgihts");	
-				activities.add("togo");
-				boolean success = false;
-				try {
-					res.makeReservation(currentUser, dateTime, new ArrayList<>(), OrderStatus.Counter);		
-					success = true;
-				} catch (MessageException ex){
-					System.out.println(ex.getMessage());
+				for (int i = 0; i < table.getRowCount(); i++) {
+					if (table.getValueAt(i, 0).equals(Boolean.TRUE)) {
+						activities.add(dataStrings.get(i)[1].toString());
+					}
 				}
-				if (success) {
+				try {
+					res.makeReservation(currentUser, dateTime, activities, OrderStatus.Counter);
 					VisitSuccess vs = new VisitSuccess(contentFrame, currentUser);
 					vs.setVisible(true);
 					thisPanel.setVisible(false);
 					contentFrame.remove(thisPanel);
 					contentFrame.setContentPane(vs);
+				} catch (Exception ex){
+					System.out.println(ex.getMessage());
 				}
-				
 			}
 		});
 		btnNewButton.setBounds(282, 266, 89, 23);
 		add(btnNewButton);
 		
-		JLabel lblNewLabel_4 = new JLabel("Total Price After Discount:");
-		lblNewLabel_4.setBounds(35, 270, 128, 14);
-		add(lblNewLabel_4);
-		
-		JLabel lblNewLabel_5 = new JLabel("$00");
-		lblNewLabel_5.setBounds(200, 270, 46, 14);
-		add(lblNewLabel_5);
-		
-		JButton btnReturnToHome = new JButton("Return to Home");
-		btnReturnToHome.addActionListener(new ActionListener() {
+		JButton btnNewButton_1 = new JButton("Return Home");
+		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Home homePage = new Home(contentFrame, currentUser);
-				homePage.setVisible(true);
+				Home h = new Home(contentFrame, currentUser);
+				h.setVisible(true);
 				thisPanel.setVisible(false);
 				contentFrame.remove(thisPanel);
-				contentFrame.setContentPane(homePage);
+				contentFrame.setContentPane(h);
 			}
 		});
-		btnReturnToHome.setBounds(231, 11, 177, 23);
-		add(btnReturnToHome);
-			
-	}
+		btnNewButton_1.setBounds(272, 11, 149, 23);
+		add(btnNewButton_1);
+		
+		
+		
+		
+    }
+
+    private class DataModel extends DefaultTableModel {
+
+        public DataModel(Object[][] data, Object[] columnNames) {
+            super(data, columnNames);
+        }
+
+        @Override
+        public Class<?> getColumnClass(int columnIndex) {
+            if (columnIndex == CHECK_COL) {
+                return getValueAt(0, CHECK_COL).getClass();
+            }
+            return super.getColumnClass(columnIndex);
+        }
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return column == CHECK_COL;
+        }
+    }
+
+    private class ControlPanel extends JPanel {
+
+        public ControlPanel() {
+            this.add(new JLabel("Selection:"));
+            this.add(new JButton(new SelectionAction("Clear", false)));
+            this.add(new JButton(new SelectionAction("Check", true)));
+        }
+    }
+
+    private class SelectionAction extends AbstractAction {
+
+        boolean value;
+
+        public SelectionAction(String name, boolean value) {
+            super(name);
+            this.value = value;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            for (int i = 0; i < dataModel.getRowCount(); i++) {
+                if (selectionModel.isSelectedIndex(i)) {
+                    dataModel.setValueAt(value, i, CHECK_COL);
+                }
+            }
+        }
+    }
 }

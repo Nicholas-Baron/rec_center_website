@@ -3,6 +3,7 @@ package src.rec_center_desktop.model;
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -25,8 +26,10 @@ public class StudentRegister extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public StudentRegister(String fullname, String DOB, String phone, Address address) {
+	public StudentRegister(JFrame contentFrame, String fullname, String DOB, String phone, Address address) {
 		setLayout(null);
+		
+		JPanel thisPanel = this;
 		
 		JLabel lblNewLabel = new JLabel("Student Register");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 31));
@@ -78,7 +81,11 @@ public class StudentRegister extends JPanel {
 				} catch (Exception ex) {
 					
 				}
-				
+				Login login = new Login(contentFrame);
+				login.setVisible(true);
+				thisPanel.setVisible(false);
+				contentFrame.remove(thisPanel);
+				contentFrame.setContentPane(login);
 			}
 		});
 		registerButton.setBounds(176, 266, 89, 23);

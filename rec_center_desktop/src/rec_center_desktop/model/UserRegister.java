@@ -42,12 +42,12 @@ public class UserRegister extends JPanel {
 		numberField.setColumns(10);
 		
 		fullnameField = new JTextField();
-		fullnameField.setBounds(127, 84, 235, 20);
+		fullnameField.setBounds(147, 84, 215, 20);
 		add(fullnameField);
 		fullnameField.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Full Name");
-		lblNewLabel.setBounds(77, 87, 53, 14);
+		lblNewLabel.setBounds(77, 87, 79, 14);
 		add(lblNewLabel);
 		
 		DOBField = new JTextField();
@@ -112,7 +112,7 @@ public class UserRegister extends JPanel {
 		btnStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Address address = new Address(streetField.getText(), Integer.parseInt(numberField.getText()), Integer.parseInt(zip.getText()), city.getText(), state.getText());
-				StudentRegister sr = new StudentRegister(fullnameField.getText(), DOBField.getText(), phoneField.getText(), address);
+				StudentRegister sr = new StudentRegister(contentFrame, fullnameField.getText(), DOBField.getText(), phoneField.getText(), address);
 				sr.setVisible(true); thisPanel.setVisible(false);
 				contentFrame.remove(thisPanel);
 				contentFrame.setContentPane(sr);

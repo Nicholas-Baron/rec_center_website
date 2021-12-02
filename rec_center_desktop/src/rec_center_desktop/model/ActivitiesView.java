@@ -106,6 +106,6 @@ public class ActivitiesView extends JPanel {
 		historyActivityField.setColumns(10);
 		historyActivityField.setBounds(297, 226, 135, 20);
 		add(historyActivityField);
-
+		
 	}
 }
