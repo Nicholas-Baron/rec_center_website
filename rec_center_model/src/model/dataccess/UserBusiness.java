@@ -1,14 +1,7 @@
 package model.dataccess;
 
 import java.sql.Date;
-import java.sql.Timestamp;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import model.entities.Address;
-import model.entities.Order;
-import model.entities.RecreationalActivity;
 
 public class UserBusiness {
 	private UserBusiness() {
