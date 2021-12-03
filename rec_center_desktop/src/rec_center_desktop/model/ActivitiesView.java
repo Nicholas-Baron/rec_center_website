@@ -16,8 +16,6 @@ import javax.swing.JTextField;
 
 public class ActivitiesView extends JPanel {
 	private JTable table;
-	private JTextField txtEnterActivityName;
-	private JTextField historyActivityField;
 
 	/**
 	 * Create the panel.
@@ -54,13 +52,7 @@ public class ActivitiesView extends JPanel {
 		btnNewButton.setBounds(21, 259, 135, 23);
 		add(btnNewButton);
 		
-		txtEnterActivityName = new JTextField();
-		txtEnterActivityName.setText("Enter activity name");
-		txtEnterActivityName.setBounds(297, 260, 135, 20);
-		add(txtEnterActivityName);
-		txtEnterActivityName.setColumns(10);
-		
-		JButton btnChangePrice = new JButton("Change Price: ");
+		JButton btnChangePrice = new JButton("Change Price");
 		btnChangePrice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String activity = "";
@@ -68,15 +60,16 @@ public class ActivitiesView extends JPanel {
 				if (table.getSelectedRowCount() == 1) {
 					activity = table.getValueAt(table.getSelectedRow(), 0).toString();
 					price = table.getValueAt(table.getSelectedRow(), 1).toString();
+					ChangePrice ca = new ChangePrice(contentFrame, userName, activity, price);
+					ca.setVisible(true);
+					thisPanel.setVisible(false);
+					contentFrame.remove(thisPanel);
+					contentFrame.setContentPane(ca);
 				}
-				ChangePrice ca = new ChangePrice(contentFrame, userName, activity, price);
-				ca.setVisible(true);
-				thisPanel.setVisible(false);
-				contentFrame.remove(thisPanel);
-				contentFrame.setContentPane(ca);
+				
 			}
 		});
-		btnChangePrice.setBounds(166, 259, 121, 23);
+		btnChangePrice.setBounds(271, 259, 121, 23);
 		add(btnChangePrice);
 		
 		JButton btnReturnHome = new JButton("Return Home");
@@ -92,29 +85,24 @@ public class ActivitiesView extends JPanel {
 		btnReturnHome.setBounds(271, 11, 148, 23);
 		add(btnReturnHome);
 		
-		JButton btnPriceHistory = new JButton("Price History: ");
+		JButton btnPriceHistory = new JButton("Price History");
 		btnPriceHistory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String activity = "";
 				String price = "";
 				if (table.getSelectedRowCount() == 1) {
 					activity = table.getValueAt(table.getSelectedRow(), 0).toString();
+					ActivityPriceHistory ca = new ActivityPriceHistory(contentFrame, userName, activity);
+					ca.setVisible(true);
+					thisPanel.setVisible(false);
+					contentFrame.remove(thisPanel);
+					contentFrame.setContentPane(ca);
 				}
-				ActivityPriceHistory ca = new ActivityPriceHistory(contentFrame, userName, activity);
-				ca.setVisible(true);
-				thisPanel.setVisible(false);
-				contentFrame.remove(thisPanel);
-				contentFrame.setContentPane(ca);
+				
 			}
 		});
-		btnPriceHistory.setBounds(166, 225, 121, 23);
+		btnPriceHistory.setBounds(271, 225, 121, 23);
 		add(btnPriceHistory);
-		
-		historyActivityField = new JTextField();
-		historyActivityField.setText("Enter activity name");
-		historyActivityField.setColumns(10);
-		historyActivityField.setBounds(297, 226, 135, 20);
-		add(historyActivityField);
 		
 	}
 }

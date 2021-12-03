@@ -18,14 +18,14 @@ public class PriceChangeSuccess extends JPanel {
 		JPanel thisPanel = this;
 		setLayout(null);
 		
-		JButton btnNewButton = new JButton("Return to Home");
+		JButton btnNewButton = new JButton("Return to Activities List");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Home homePage = new Home(contentFrame, currentUser);
-				homePage.setVisible(true);
+				ActivitiesView av = new ActivitiesView(contentFrame, currentUser);
+				av.setVisible(true);
 				thisPanel.setVisible(false);
 				contentFrame.remove(thisPanel);
-				contentFrame.setContentPane(homePage);
+				contentFrame.setContentPane(av);
 			}
 		});
 		btnNewButton.setBounds(99, 241, 245, 23);
