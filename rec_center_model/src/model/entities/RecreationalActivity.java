@@ -30,7 +30,7 @@ public class RecreationalActivity {
 	@Column(scale = 2, precision = 10, nullable = false)
 	private BigDecimal price;
 
-	@OneToMany(mappedBy = "activity")
+	@OneToMany(mappedBy = "activity", cascade = { CascadeType.ALL })
 	private List<HistoricalPrice> priceHistory = new ArrayList<>();
 
 	@ManyToMany(cascade = { CascadeType.PERSIST })
