@@ -14,6 +14,7 @@ import model.dataccess.UserBusiness;
 import model.entities.Address;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 
 public class ProfessorRegister extends JPanel {
 	private JTextField departmentField;
@@ -24,8 +25,10 @@ public class ProfessorRegister extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ProfessorRegister(String fullname, String dob, String phone, Address address) {
+	public ProfessorRegister(JFrame contentFrame, String fullname, String dob, String phone, Address address) {
 		setLayout(null);
+		
+		JPanel thisPanel = this;
 		
 		JLabel lblProfessorRegister = new JLabel("Professor Register");
 		lblProfessorRegister.setFont(new Font("Tahoma", Font.PLAIN, 31));
@@ -74,6 +77,11 @@ public class ProfessorRegister extends JPanel {
 				UserBusiness ub = UserBusiness.getInstance();
 				try {
 					ub.createCustomer(Integer.parseInt(broncoId.getText()), Date.valueOf(dob), fullname, Integer.parseInt(phone), departmentField.getText(), officeField.getText(), researchField.getText(), address);
+					Login login = new Login(contentFrame);
+					login.setVisible(true);
+					thisPanel.setVisible(false);
+					contentFrame.remove(thisPanel);
+					contentFrame.setContentPane(login);
 				} catch (Exception ex) {
 					throw new MessageException("Professor creation has failed");
 				}

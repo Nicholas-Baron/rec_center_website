@@ -126,7 +126,7 @@ public class UserRegister extends JPanel {
 		btnProfessor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Address address = new Address(streetField.getText(), Integer.parseInt(numberField.getText()), Integer.parseInt(zip.getText()), city.getText(), state.getText());
-				ProfessorRegister sr = new ProfessorRegister(fullnameField.getText(), DOBField.getText(), phoneField.getText(), address);
+				ProfessorRegister sr = new ProfessorRegister(contentFrame, fullnameField.getText(), DOBField.getText(), phoneField.getText(), address);
 				sr.setVisible(true); thisPanel.setVisible(false);
 				contentFrame.remove(thisPanel);
 				contentFrame.setContentPane(sr);
