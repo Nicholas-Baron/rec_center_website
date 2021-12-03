@@ -34,6 +34,9 @@ public class VisitsView extends JPanel {
 							.map(a -> new Object[] { a.getDatetime(), a.getStatus()})
 							.collect(Collectors.toList());
 			
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setBounds(56, 259, 341, -197);
+			add(scrollPane);
 			
 			table = new JTable(Arrays.copyOf(dataStrings.toArray(), dataStrings.size(), Object[][].class), columnNames);
 			add(table);
@@ -52,10 +55,6 @@ public class VisitsView extends JPanel {
 			btnReturnHome.setBounds(145, 259, 148, 23);
 			add(btnReturnHome);
 			
-			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setBounds(56, 259, 341, -197);
-			add(scrollPane);
-			
 			JLabel lblNewLabel = new JLabel("Viewing Visits for: ");
 			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			lblNewLabel.setBounds(10, 11, 130, 48);
@@ -69,6 +68,10 @@ public class VisitsView extends JPanel {
 			JButton btnViewReceipts = new JButton("View Receipts");
 			btnViewReceipts.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					if (table.getSelectedRowCount() == 1) {
+						String s = table.getValueAt(table.getSelectedRow(), 0).toString();
+						System.out.println(s);
+					}
 					ViewReceipt vr = new ViewReceipt(contentFrame, userName);
 					vr.setVisible(true);
 					thisPanel.setVisible(false);

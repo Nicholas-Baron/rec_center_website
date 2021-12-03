@@ -90,6 +90,10 @@ public class ActivitiesView extends JPanel {
 		JButton btnPriceHistory = new JButton("Price History: ");
 		btnPriceHistory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (table.getSelectedRowCount() == 1) {
+					String s = table.getValueAt(table.getSelectedRow(), 0).toString();
+					System.out.println(s);
+				}
 				String activity = txtEnterActivityName.getText();
 				ActivityPriceHistory ca = new ActivityPriceHistory(contentFrame, userName, activity);
 				ca.setVisible(true);
