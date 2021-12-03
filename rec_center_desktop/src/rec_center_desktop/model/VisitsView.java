@@ -86,6 +86,15 @@ public class VisitsView extends JPanel {
 			add(btnViewReceipts);
 			
 			JButton btnViewAnalytics = new JButton("View Analytics");
+			btnViewAnalytics.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					AnayticsPage vr = new AnayticsPage(contentFrame, userName);
+					vr.setVisible(true);
+					thisPanel.setVisible(false);
+					contentFrame.remove(thisPanel);
+					contentFrame.setContentPane(vr);
+				}
+			});
 			btnViewAnalytics.setBounds(230, 55, 148, 23);
 			add(btnViewAnalytics);
 			
