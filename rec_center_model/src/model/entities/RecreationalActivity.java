@@ -1,6 +1,8 @@
 package model.entities;
 
 import java.math.BigDecimal;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -28,8 +30,8 @@ public class RecreationalActivity {
 	@Column(scale = 2, precision = 10, nullable = false)
 	private BigDecimal price;
 
-	@OneToMany(mappedBy = "activity")
-	private List<HistoricalPrice> priceHistory;
+	@OneToMany(mappedBy = "activity", cascade = { CascadeType.ALL })
+	private List<HistoricalPrice> priceHistory = new ArrayList<>();
 
 	@ManyToMany(cascade = { CascadeType.PERSIST })
 	@JoinTable(name = "activity_orders", joinColumns = @JoinColumn(name = "activity_id"),
@@ -58,5 +60,10 @@ public class RecreationalActivity {
 
 	public List<Order> getOrders_used_in() {
 		return orders_used_in;
+	}
+
+	public void changePrice(Date date, BigDecimal price) {
+		priceHistory.add(new HistoricalPrice(this, date, price));
+		this.price = price;
 	}
 }

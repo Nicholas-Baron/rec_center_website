@@ -8,23 +8,6 @@ import model.entities.Customer;
 public class LoginDataAccess {
 
 	/**
-	 * Check if the customer exists by id.
-	 * 
-	 * @param customer
-	 * @return
-	 */
-	public boolean verifyCustomerExists(Customer customer) {
-
-		Session session = ConnectionFactory.getInstance().getConnection();
-
-		Query<Customer> query = session.createQuery("select 1 from Customer c where c.id = :id",
-						Customer.class);
-		query.setParameter("id", customer.getID());
-
-		return query.uniqueResult() != null;
-	}
-
-	/**
 	 * Check if the customer exists by name.
 	 * 
 	 * @param name

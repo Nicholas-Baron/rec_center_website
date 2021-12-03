@@ -1,11 +1,11 @@
-package rec_center_desktop.model;
+package src.rec_center_desktop.model;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import model.dataccess.LoginBusiness;
-import rec_center_desktop.model.Home;
-import rec_center_desktop.model.StudentRegister;
+import src.rec_center_desktop.model.Home;
+import src.rec_center_desktop.model.StudentRegister;
 
 import javax.swing.JLabel;
 import java.awt.Label;

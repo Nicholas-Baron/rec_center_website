@@ -1,14 +1,18 @@
-package rec_center_desktop.model;
+package src.rec_center_desktop.model;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.math.BigDecimal;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import model.dataccess.LoginBusiness;
-import rec_center_desktop.model.Login;
+import model.dataccess.ReservationBusiness;
+import model.dataccess.UserBusiness;
+import model.entities.CustomerType;
+import src.rec_center_desktop.model.Login;
 
 public class MainWindow extends JFrame {
 
@@ -39,7 +43,7 @@ public class MainWindow extends JFrame {
 	 */
 	public MainWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 350);
+		setBounds(100, 100, 465, 350);
 		contentPane = new Login(this);
 		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		//contentPane.setLayout(new BorderLayout(0, 0));

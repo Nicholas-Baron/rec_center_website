@@ -1,4 +1,4 @@
-package rec_center_desktop.model;
+package src.rec_center_desktop.model;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -22,6 +22,11 @@ public class Home extends JPanel {
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				VisitsView vv = new VisitsView(contentFrame, currentUser);
+				vv.setVisible(true);
+				thisPanel.setVisible(false);
+				contentFrame.remove(thisPanel);
+				contentFrame.setContentPane(vv);
 			}
 		});
 		btnNewButton.setBounds(63, 206, 135, 23);
@@ -35,7 +40,7 @@ public class Home extends JPanel {
 		JButton btnNewOrder = new JButton("Schedule Visit");
 		btnNewOrder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VisitRegistration visitRegistration = new VisitRegistration(currentUser);
+				VisitRegistration visitRegistration = new VisitRegistration(contentFrame, currentUser);
 				visitRegistration.setVisible(true);
 				thisPanel.setVisible(false);
 				contentFrame.remove(thisPanel);
@@ -46,8 +51,30 @@ public class Home extends JPanel {
 		add(btnNewOrder);
 		
 		JButton btnAcrivitiesList = new JButton("Activities List");
+		btnAcrivitiesList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ActivitiesView av = new ActivitiesView(contentFrame, currentUser);
+				av.setVisible(true);
+				thisPanel.setVisible(false);
+				contentFrame.remove(thisPanel);
+				contentFrame.setContentPane(av);
+			}
+		});
 		btnAcrivitiesList.setBounds(63, 242, 135, 23);
 		add(btnAcrivitiesList);
+		
+		JButton btnDignOut = new JButton("Sign Out");
+		btnDignOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Login login = new Login(contentFrame);
+				login.setVisible(true);
+				thisPanel.setVisible(false);
+				contentFrame.remove(thisPanel);
+				contentFrame.setContentPane(login);
+			}
+		});
+		btnDignOut.setBounds(250, 242, 135, 23);
+		add(btnDignOut);
 
 	}
 }

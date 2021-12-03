@@ -1,12 +1,14 @@
-package rec_center_desktop.model;
+package src.rec_center_desktop.model;
 
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 
+import model.dataccess.MessageException;
 import model.dataccess.ReservationBusiness;
 import model.dataccess.UserBusiness;
 import model.entities.Address;
@@ -25,8 +27,10 @@ public class StudentRegister extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public StudentRegister(String fullname, String DOB, String phone, Address address) {
+	public StudentRegister(JFrame contentFrame, String fullname, String DOB, String phone, Address address) {
 		setLayout(null);
+		
+		JPanel thisPanel = this;
 		
 		JLabel lblNewLabel = new JLabel("Student Register");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 31));
@@ -75,9 +79,15 @@ public class StudentRegister extends JPanel {
 				UserBusiness ub = UserBusiness.getInstance();
 				try {
 					ub.createCustomer(Integer.parseInt(broncoId.getText()), Date.valueOf(DOB), fullname, Integer.parseInt(phone), Date.valueOf(enterDateField.getText()), Date.valueOf(gradDateField.getText()), majorField.getText(), minorField.getText(), address);
+					Login login = new Login(contentFrame);
+					login.setVisible(true);
+					thisPanel.setVisible(false);
+					contentFrame.remove(thisPanel);
+					contentFrame.setContentPane(login);
 				} catch (Exception ex) {
-					
+					throw new MessageException("Customer registration failed");
 				}
+				
 			}
 		});
 		registerButton.setBounds(176, 266, 89, 23);

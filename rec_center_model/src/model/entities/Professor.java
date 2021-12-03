@@ -1,6 +1,7 @@
 package model.entities;
 
-import javax.persistence.Column;
+import java.sql.Date;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -8,16 +9,23 @@ import javax.persistence.Entity;
 @DiscriminatorValue(value = CustomerType.Values.Professor)
 public class Professor extends Customer {
 
-	@Column(nullable = false)
 	private String department;
 
-	@Column(nullable = false)
 	private String office;
 
-	@Column(nullable = false)
 	private String research;
 
 	public Professor() {
+	}
+
+	public Professor(int broncoID, Date DOB, String fullname, int phone, String department,
+					String office, String research, Address address) {
+
+		super(broncoID, DOB, fullname, phone, address);
+
+		this.department = department;
+		this.office = office;
+		this.research = research;
 	}
 
 	public String getDepartment() {

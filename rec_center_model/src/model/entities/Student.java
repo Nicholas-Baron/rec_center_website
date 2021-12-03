@@ -9,28 +9,28 @@ import javax.persistence.Entity;
 @DiscriminatorValue(value = CustomerType.Values.Student)
 public class Student extends Customer {
 
-	@Column(name = "enter_date", nullable = false)
+	@Column(name = "enter_date")
 	protected Date enterDate;
 
-	@Column(name = "grad_date", nullable = false)
+	@Column(name = "grad_date")
 	protected Date gradDate;
 
-	@Column(nullable = false)
 	private String major;
 
-	@Column(nullable = false)
 	private String minor;
 
-	public Student(int broncoID, Date DOB, String fullname, int phone, Date enterDate, Date gradDate, String major, String minor, Address address) {
+	public Student() {
+	}
+
+	public Student(int broncoID, Date DOB, String fullname, int phone, Date enterDate,
+					Date gradDate, String major, String minor, Address address) {
+
+		super(broncoID, DOB, fullname, phone, address);
+
 		this.enterDate = enterDate;
 		this.gradDate = gradDate;
-		this.address = address;
 		this.major = major;
 		this.minor = minor;
-		this.dateOfBirth = DOB;
-		this.setPhone(phone);
-		this.setName(fullname);
-		this.setBroncoId(broncoID);
 	}
 
 	public Date getEnterDate() {

@@ -9,6 +9,7 @@ import org.hibernate.service.ServiceRegistry;
 
 import model.entities.Address;
 import model.entities.Customer;
+import model.entities.Discount;
 import model.entities.HistoricalPrice;
 import model.entities.Order;
 import model.entities.Professor;
@@ -40,6 +41,7 @@ public final class ConnectionFactory {
 			// for Hibernate to know about them
 			Metadata metadata = new MetadataSources(serviceRegistry)
 							.addAnnotatedClass(Address.class).addAnnotatedClass(Customer.class)
+							.addAnnotatedClass(Discount.class)
 							.addAnnotatedClass(HistoricalPrice.class).addAnnotatedClass(Order.class)
 							.addAnnotatedClass(Professor.class)
 							.addAnnotatedClass(ProfessorStudent.class)

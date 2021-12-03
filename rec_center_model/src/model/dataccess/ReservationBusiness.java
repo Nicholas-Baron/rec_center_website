@@ -1,11 +1,12 @@
 package model.dataccess;
 
+import java.math.BigDecimal;
+import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-
+import model.entities.CustomerType;
 import model.entities.Order;
+import model.entities.OrderStatus;
 import model.entities.RecreationalActivity;
 
 public class ReservationBusiness {
@@ -20,8 +21,8 @@ public class ReservationBusiness {
 		return instance;
 	}
 
-	public void makeReservation(String username, String datetime, List<String> activities)
-					throws MessageException {
+	public void makeReservation(String username, String datetime, List<String> activities,
+					OrderStatus status) throws MessageException {
 		if (username.equals("")) {
 			throw new MessageException("Username not informed.");
 		} else if (datetime.equals("")) {
@@ -34,7 +35,7 @@ public class ReservationBusiness {
 			// format the datetime string
 			Timestamp timestamp = Timestamp.valueOf(datetime.replace('T', ' ') + ":00");
 
-			dataAccess.createReservation(username, timestamp, activities);
+			dataAccess.createReservation(username, timestamp, activities, status);
 		} catch (IllegalArgumentException e) {
 			throw new MessageException(e.getMessage() + " : " + datetime);
 		}
@@ -52,5 +53,32 @@ public class ReservationBusiness {
 
 	public List<RecreationalActivity> getActivites() {
 		return new ReservationDataAccess().listActivities();
+	}
+
+	public BigDecimal getDiscount(CustomerType type) {
+		return new ReservationDataAccess().getDiscount(type).getPercent();
+	}
+
+	public void setDiscount(CustomerType type, BigDecimal percent) {
+
+		if (percent.compareTo(BigDecimal.ZERO) < 0) {
+			throw new MessageException("Cannot set a negative discount");
+		} else if (percent.compareTo(new BigDecimal(100)) > 0) {
+			throw new MessageException("Cannot set a discount greater than 100%");
+		}
+
+		new ReservationDataAccess().createDiscount(type, percent);
+	}
+
+	public List<Order> getOrdersBetween(Date start, Date end) {
+		if (start.compareTo(end) >= 0)
+			throw new MessageException(end + " is before " + start);
+
+		return new ReservationDataAccess().getOrdersBetween(start, end);
+	}
+	
+	public void completeOnlinePending(int orderId) {
+		//new ReservationDataAccess()
+		//return new ReservationDataAccess().completeOrder(orderId);
 	}
 }
