@@ -9,6 +9,7 @@ import javax.swing.border.LineBorder;
 
 import model.dataccess.ActivityBusiness;
 import model.dataccess.ReservationBusiness;
+import model.entities.Order;
 
 import java.awt.Color;
 import javax.swing.JButton;
@@ -30,10 +31,12 @@ public class VisitsView extends JPanel {
 
 			String[] columnNames = { "Date", "Status" };
 
-			List<Object[]> dataStrings = ReservationBusiness.getInstance().getReservations(userName).stream()
-							.map(a -> new Object[] { a.getDatetime(), a.getStatus()})
-							.collect(Collectors.toList());
+			List<Order> data = ReservationBusiness.getInstance().getReservations(userName);
 			
+			List<Object[]> dataStrings = data.stream()
+							.map(a -> new Object[] { a.getDatetime(), a.getStatus() })
+							.collect(Collectors.toList());
+
 			JScrollPane scrollPane = new JScrollPane();
 			scrollPane.setBounds(56, 259, 341, -197);
 			add(scrollPane);
@@ -68,11 +71,12 @@ public class VisitsView extends JPanel {
 			JButton btnViewReceipts = new JButton("View Receipts");
 			btnViewReceipts.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if (table.getSelectedRowCount() == 1) {
-						String s = table.getValueAt(table.getSelectedRow(), 0).toString();
-						System.out.println(s);
-					}
-					ViewReceipt vr = new ViewReceipt(contentFrame, userName);
+					if (table.getSelectedRowCount() < 1)
+						return;
+
+					Order o = data.get(table.getSelectedRow());
+					System.out.println(o.getActivities());
+					ViewReceipt vr = new ViewReceipt(contentFrame, userName, o);
 					vr.setVisible(true);
 					thisPanel.setVisible(false);
 					contentFrame.remove(thisPanel);
