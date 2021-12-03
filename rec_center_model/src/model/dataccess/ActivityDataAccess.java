@@ -48,7 +48,7 @@ public class ActivityDataAccess {
 						.setParameter("name", activity);
 		var activityObj = query.uniqueResult();
 		if (activityObj == null)
-			return;
+			throw new MessageException(activity + "does not exist");
 
 		activityObj.changePrice(new Date(Calendar.getInstance().getTime().getTime()), newPrice);
 

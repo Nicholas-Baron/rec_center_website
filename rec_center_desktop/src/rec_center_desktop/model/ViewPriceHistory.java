@@ -51,6 +51,11 @@ public class ViewPriceHistory extends JPanel {
 			JButton btnNewButton = new JButton("Return to Home");
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					Home homePage = new Home(contentFrame, currentUser);
+					homePage.setVisible(true);
+					thisPanel.setVisible(false);
+					contentFrame.remove(thisPanel);
+					contentFrame.setContentPane(homePage);
 				}
 			});
 			btnNewButton.setBounds(179, 253, 89, 23);

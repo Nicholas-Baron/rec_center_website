@@ -63,8 +63,13 @@ public class ActivitiesView extends JPanel {
 		JButton btnChangePrice = new JButton("Change Price: ");
 		btnChangePrice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String activity = txtEnterActivityName.getText();
-				ChangePrice ca = new ChangePrice(contentFrame, userName, activity);
+				String activity = "";
+				String price = "";
+				if (table.getSelectedRowCount() == 1) {
+					activity = table.getValueAt(table.getSelectedRow(), 0).toString();
+					price = table.getValueAt(table.getSelectedRow(), 1).toString();
+				}
+				ChangePrice ca = new ChangePrice(contentFrame, userName, activity, price);
 				ca.setVisible(true);
 				thisPanel.setVisible(false);
 				contentFrame.remove(thisPanel);
@@ -90,11 +95,11 @@ public class ActivitiesView extends JPanel {
 		JButton btnPriceHistory = new JButton("Price History: ");
 		btnPriceHistory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String activity = "";
+				String price = "";
 				if (table.getSelectedRowCount() == 1) {
-					String s = table.getValueAt(table.getSelectedRow(), 0).toString();
-					System.out.println(s);
+					activity = table.getValueAt(table.getSelectedRow(), 0).toString();
 				}
-				String activity = txtEnterActivityName.getText();
 				ActivityPriceHistory ca = new ActivityPriceHistory(contentFrame, userName, activity);
 				ca.setVisible(true);
 				thisPanel.setVisible(false);

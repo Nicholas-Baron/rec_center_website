@@ -17,14 +17,14 @@ public class ChangePrice extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ChangePrice(JFrame contentFrame, String currentUser, String activity) {
+	public ChangePrice(JFrame contentFrame, String currentUser, String activity, String price) {
 
 		JPanel thisPanel = this;
 		setLayout(null);
 		
 		textField = new JTextField();
-		textField.setText("5.00");
 		textField.setBounds(226, 119, 128, 20);
+		textField.setText(price);
 		add(textField);
 		textField.setColumns(10);
 		
@@ -43,16 +43,36 @@ public class ChangePrice extends JPanel {
 		JButton btnNewButton = new JButton("Submit");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//ActivityBusiness ab = ActivityBusiness.getInstance();
-				PriceChangeSuccess homePage = new PriceChangeSuccess(contentFrame, currentUser);
+				try {
+					ActivityBusiness ab = ActivityBusiness.getInstance();
+					System.out.println(activity + " " + textField.getText());
+					ab.updateActivityPrice(activity, textField.getText());
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+				PriceChangeSuccess pc = new PriceChangeSuccess(contentFrame, currentUser);
+				pc.setVisible(true);
+				thisPanel.setVisible(false);
+				contentFrame.remove(thisPanel);
+				contentFrame.setContentPane(pc);
+			}
+		});
+		activityLabel.setText(activity);
+		btnNewButton.setBounds(171, 209, 89, 23);
+		add(btnNewButton);
+		
+		JButton button = new JButton("Return to Home");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Home homePage = new Home(contentFrame, currentUser);
 				homePage.setVisible(true);
 				thisPanel.setVisible(false);
 				contentFrame.remove(thisPanel);
 				contentFrame.setContentPane(homePage);
 			}
 		});
-		btnNewButton.setBounds(171, 209, 89, 23);
-		add(btnNewButton);
+		button.setBounds(299, 11, 141, 23);
+		add(button);
 	}
 
 }
