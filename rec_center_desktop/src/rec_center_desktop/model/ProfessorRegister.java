@@ -9,6 +9,7 @@ import java.sql.Date;
 
 import javax.swing.JTextField;
 
+import model.dataccess.MessageException;
 import model.dataccess.UserBusiness;
 import model.entities.Address;
 
@@ -59,12 +60,12 @@ public class ProfessorRegister extends JPanel {
 		add(researchField);
 		
 		JLabel lblNewLabel_1_1_1_2 = new JLabel("BroncoID");
-		lblNewLabel_1_1_1_2.setBounds(47, 228, 136, 14);
+		lblNewLabel_1_1_1_2.setBounds(54, 202, 136, 14);
 		add(lblNewLabel_1_1_1_2);
 		
 		broncoId = new JTextField();
 		broncoId.setColumns(10);
-		broncoId.setBounds(212, 225, 179, 20);
+		broncoId.setBounds(219, 199, 179, 20);
 		add(broncoId);
 		
 		JButton registerButton = new JButton("Register");
@@ -74,7 +75,7 @@ public class ProfessorRegister extends JPanel {
 				try {
 					ub.createCustomer(Integer.parseInt(broncoId.getText()), Date.valueOf(dob), fullname, Integer.parseInt(phone), departmentField.getText(), officeField.getText(), researchField.getText(), address);
 				} catch (Exception ex) {
-					
+					throw new MessageException("Professor creation has failed");
 				}
 			}
 		});

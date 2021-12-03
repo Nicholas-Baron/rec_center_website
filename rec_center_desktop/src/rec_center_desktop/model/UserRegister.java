@@ -136,6 +136,15 @@ public class UserRegister extends JPanel {
 		add(btnProfessor);
 		
 		JButton btnProfessorstudent = new JButton("Professor and Student");
+		btnProfessorstudent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Address address = new Address(streetField.getText(), Integer.parseInt(numberField.getText()), Integer.parseInt(zip.getText()), city.getText(), state.getText());
+				ProfessorStudentRegister sr = new ProfessorStudentRegister(contentFrame, fullnameField.getText(), DOBField.getText(), phoneField.getText(), address);
+				sr.setVisible(true); thisPanel.setVisible(false);
+				contentFrame.remove(thisPanel);
+				contentFrame.setContentPane(sr);
+			}
+		});
 		btnProfessorstudent.setBounds(136, 233, 178, 23);
 		add(btnProfessorstudent);
 		
