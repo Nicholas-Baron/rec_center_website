@@ -2,12 +2,16 @@ package src.rec_center_desktop.model;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.math.BigDecimal;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import model.dataccess.LoginBusiness;
+import model.dataccess.ReservationBusiness;
+import model.dataccess.UserBusiness;
+import model.entities.CustomerType;
 import src.rec_center_desktop.model.Login;
 
 public class MainWindow extends JFrame {

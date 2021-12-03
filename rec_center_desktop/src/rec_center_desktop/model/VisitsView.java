@@ -68,12 +68,11 @@ public class VisitsView extends JPanel {
 			nameLabel.setBounds(145, 11, 263, 48);
 			add(nameLabel);
 			
-			JButton btnViewReceipts = new JButton("View Receipts");
+			JButton btnViewReceipts = new JButton("View Receipt");
 			btnViewReceipts.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if (table.getSelectedRowCount() < 1)
 						return;
-
 					Order o = data.get(table.getSelectedRow());
 					System.out.println(o.getActivities());
 					ViewReceipt vr = new ViewReceipt(contentFrame, userName, o);
@@ -87,8 +86,20 @@ public class VisitsView extends JPanel {
 			add(btnViewReceipts);
 			
 			JButton btnViewAnalytics = new JButton("View Analytics");
-			btnViewAnalytics.setBounds(230, 221, 148, 23);
+			btnViewAnalytics.setBounds(230, 55, 148, 23);
 			add(btnViewAnalytics);
+			
+			JButton btnCompleteVisit = new JButton("Complete Visit");
+			btnCompleteVisit.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					if (table.getSelectedRowCount() < 1)
+						return;
+					ReservationBusiness rb = ReservationBusiness.getInstance();
+					table.setValueAt("OnlineComplete", table.getSelectedRow(), 1);
+				}
+			});
+			btnCompleteVisit.setBounds(240, 221, 148, 23);
+			add(btnCompleteVisit);
 		}
 		
 	}
