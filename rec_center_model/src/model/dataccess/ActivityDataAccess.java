@@ -53,6 +53,7 @@ public class ActivityDataAccess {
 		activityObj.changePrice(new Date(Calendar.getInstance().getTime().getTime()), newPrice);
 
 		session.update(activityObj);
+		activityObj.getPriceHistory().forEach(hp -> session.saveOrUpdate(hp));
 		transaction.commit();
 	}
 
