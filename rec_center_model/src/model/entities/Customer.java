@@ -64,6 +64,7 @@ public class Customer {
 		this.address = address;
 		this.broncoID = broncoID;
 		this.dateOfBirth = dob;
+		this.phone = phone;
 	}
 
 	public String getName() {
@@ -96,6 +97,10 @@ public class Customer {
 
 	public void setBroncoId(int broncoId) {
 		this.broncoID = broncoId;
+	}
+
+	public Date getDOB() {
+		return dateOfBirth;
 	}
 
 }
