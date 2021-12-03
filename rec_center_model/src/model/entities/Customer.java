@@ -52,8 +52,8 @@ public class Customer {
 	@Column(nullable = false, name = "customer_type", updatable = false, insertable = false)
 	private CustomerType type;
 
-	public Integer getID() {
-		return this.customerID;
+	public Integer getBroncoID() {
+		return this.broncoID;
 	}
 
 	public Customer() {
