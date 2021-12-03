@@ -61,17 +61,17 @@ public class ChangePrice extends JPanel {
 		btnNewButton.setBounds(171, 209, 89, 23);
 		add(btnNewButton);
 		
-		JButton button = new JButton("Return to Home");
+		JButton button = new JButton("Return to Activites View");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Home homePage = new Home(contentFrame, currentUser);
-				homePage.setVisible(true);
+				ActivitiesView av = new ActivitiesView(contentFrame, currentUser);
+				av.setVisible(true);
 				thisPanel.setVisible(false);
 				contentFrame.remove(thisPanel);
-				contentFrame.setContentPane(homePage);
+				contentFrame.setContentPane(av);
 			}
 		});
-		button.setBounds(299, 11, 141, 23);
+		button.setBounds(249, 11, 191, 23);
 		add(button);
 	}
 

@@ -60,5 +60,18 @@ public class CreateActivity extends JPanel {
 		btnNewButton.setBounds(174, 211, 89, 23);
 		add(btnNewButton);
 		
+		JButton btnReturnActivitiesPage = new JButton("Return Activities Page");
+		btnReturnActivitiesPage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ActivitiesView av = new ActivitiesView(contentFrame, currentUser);
+				av.setVisible(true);
+				thisPanel.setVisible(false);
+				contentFrame.remove(thisPanel);
+				contentFrame.setContentPane(av);
+			}
+		});
+		btnReturnActivitiesPage.setBounds(239, 11, 201, 23);
+		add(btnReturnActivitiesPage);
+		
 	}
 }
