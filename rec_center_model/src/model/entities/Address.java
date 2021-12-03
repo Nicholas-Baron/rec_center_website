@@ -78,4 +78,12 @@ public class Address {
 		this.state = state;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof Address))
+			return false;
+		var a = (Address) o;
+		return a.city.equals(this.city) && a.state.equals(this.state) && a.number == this.number
+						&& a.street.equals(this.street) && a.zipcode == this.zipcode;
+	}
 }
