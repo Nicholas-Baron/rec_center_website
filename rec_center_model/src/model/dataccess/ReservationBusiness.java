@@ -76,9 +76,4 @@ public class ReservationBusiness {
 
 		return new ReservationDataAccess().getOrdersBetween(start, end);
 	}
-	
-	public void completeOnlinePending(int orderId) {
-		//new ReservationDataAccess()
-		//return new ReservationDataAccess().completeOrder(orderId);
-	}
 }
