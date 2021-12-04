@@ -33,6 +33,8 @@ public class VisitRegistration extends JPanel {
     
     private JFormattedTextField dateField;
 	private JFormattedTextField timeField;
+	public JLabel TotalPrice;
+    private double totalPrice = 0;
 	
 	private JPanel thisPanel = this;
 
@@ -93,15 +95,6 @@ public class VisitRegistration extends JPanel {
 		comboBox.setBounds(156, 107, 209, 22);
 		this.add(comboBox);
 		
-
-		JLabel lblNewLabel_4 = new JLabel("Total Price After Discount:");
-		lblNewLabel_4.setBounds(35, 270, 171, 14);
-		add(lblNewLabel_4);
-		
-		JLabel lblNewLabel_5 = new JLabel("$00");
-		lblNewLabel_5.setBounds(216, 270, 46, 14);
-		add(lblNewLabel_5);
-		
 		JButton btnNewButton = new JButton("Submit");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -127,7 +120,7 @@ public class VisitRegistration extends JPanel {
 				}
 			}
 		});
-		btnNewButton.setBounds(282, 266, 89, 23);
+		btnNewButton.setBounds(192, 266, 89, 23);
 		add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Return Home");
@@ -180,7 +173,6 @@ public class VisitRegistration extends JPanel {
     private class SelectionAction extends AbstractAction {
 
         boolean value;
-
         public SelectionAction(String name, boolean value) {
             super(name);
             this.value = value;
@@ -190,7 +182,10 @@ public class VisitRegistration extends JPanel {
         public void actionPerformed(ActionEvent e) {
             for (int i = 0; i < dataModel.getRowCount(); i++) {
                 if (selectionModel.isSelectedIndex(i)) {
+                	totalPrice = totalPrice + Double.parseDouble((String) dataModel.getValueAt(i, 2)) ;
                     dataModel.setValueAt(value, i, CHECK_COL);
+                    TotalPrice.setText("$" + totalPrice);
+                    TotalPrice.updateUI();
                 }
             }
         }
