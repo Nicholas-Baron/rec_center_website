@@ -66,4 +66,13 @@ public class RecreationalActivity {
 		priceHistory.add(new HistoricalPrice(this, date, price));
 		this.price = price;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof RecreationalActivity))
+			return false;
+
+		var r = (RecreationalActivity) o;
+		return r.name.equals(this.name) && r.price.equals(this.price);
+	}
 }
