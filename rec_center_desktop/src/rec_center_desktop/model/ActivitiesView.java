@@ -37,7 +37,7 @@ public class ActivitiesView extends JPanel {
 		
 		table = new JTable(Arrays.copyOf(dataStrings.toArray(), dataStrings.size(), Object[][].class), columnNames);
 		add(table);
-		table.setBounds(56, 89, 322, 80);
+		table.setBounds(56, 89, 322, 125);
 		
 		JButton btnNewButton = new JButton("Create Activity");
 		btnNewButton.addActionListener(new ActionListener() {
