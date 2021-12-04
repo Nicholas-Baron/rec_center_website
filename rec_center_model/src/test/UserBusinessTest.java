@@ -15,7 +15,7 @@ import model.entities.Professor;
 import model.entities.ProfessorStudent;
 import model.entities.Student;
 
-class UserActivityTest {
+class UserBusinessTest {
 
 	private Address address = new Address("test st", 123, 9876, "Pomona", "CA");
 	private Date today = new Date(Calendar.getInstance().getTime().getTime());
